@@ -9,6 +9,13 @@ module.exports = {
     extend: {
       colors: {
         act: "#4ADE80",
+        l_body: "white",
+        d_body: "#111827",
+        l_component: "white",
+        d_component: "#1F2937",
+        l_txt: "black",
+        d_txt: "white",
+        m_txt: "#9CA3AF",
       },
     },
   },
