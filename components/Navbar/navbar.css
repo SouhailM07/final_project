@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+nav {
+  @apply flex items-center justify-between;
+  @apply h-[5rem] px-[2rem];
+  @apply text-white bg-gray-800;
+}
+
+#Navbar-s1 {
+  @apply grid grid-cols-2 items-center;
+  @apply min-w-[43rem];
+}
+
+#Navbar-s1 img {
+  @apply rotate-90;
+  @apply h-[3rem] w-[3rem] mr-[1rem];
+}
+
+#Navbar-s1 span {
+  @apply text-[2.8rem] font-bold;
+}
+
+#Navbar-s1-boardName {
+  @apply font-bold;
+  @apply text-[1.8rem];
+  @apply text-act;
+}
+
+#Navbar-s2 {
+  @apply flex justify-between space-x-2;
+}
+
+#Navbar-s2-addBtn {
+  @apply flex items-center justify-center space-x-3 rounded-full;
+  @apply shadow-2xl w-[12rem] h-[3rem];
+  @apply bg-act;
+}
