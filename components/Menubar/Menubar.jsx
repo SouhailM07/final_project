@@ -1,4 +1,8 @@
 "use client";
+// ! redux
+import { useDispatch, useSelector } from "react-redux";
+import { toggle_createBoard_f } from "@/app/redux/reducers/createBoard";
+// style
 import "./menubar.css";
 import { motion } from "framer-motion";
 // hooks
@@ -14,6 +18,7 @@ import showLogo from "../../public/eye-regular.svg";
 export default function Menubar() {
   let [showMenuBar, setShowMenuBar] = useState(false);
   let showBtn = ["showMenuBar", ""];
+  let dispatch = useDispatch();
   return (
     <>
       <motion.aside animate={{ x: showMenuBar ? "-20rem" : 0 }}>
@@ -22,7 +27,10 @@ export default function Menubar() {
             ALL BOARDS <span>(2)</span>
           </div>
           <Boards />
-          <button className="border-2 border-red-500 py-[1rem] hover:bg-white">
+          <button
+            onClick={() => dispatch(toggle_createBoard_f(true))}
+            className="border-2 border-red-500 py-[1rem] hover:bg-white"
+          >
             <Image src={layoutLogo} alt="img" />
             <span>Create New Board</span>
           </button>

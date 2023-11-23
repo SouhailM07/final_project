@@ -12,11 +12,11 @@ export async function POST(request) {
   try {
     await connectMongoose();
 
-    const { name } = await request.json();
-    let newBoard = new Board({ name });
+    const { board_name } = await request.json();
+    let newBoard = new Board({ board_name });
     await newBoard.save();
     return NextResponse.json(
-      { message: `new board was created ${name}` },
+      { message: `new board was created ${board_name}` },
       { status: 201 }
     );
   } catch (error) {
