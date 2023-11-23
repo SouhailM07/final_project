@@ -30,29 +30,7 @@ export default function Menubar() {
         {/*  */}
         <div id="Menubar-s2">
           <ToggleMode />
-          <div
-            className={`border-2 py-[1rem] rounded-full bg-d_component ${
-              showBtn[+showMenuBar]
-            }`}
-          >
-            {!showMenuBar ? (
-              <span>
-                <Image
-                  src={showLogo}
-                  alt="logo"
-                  className="h-[1rem] w-[1rem]"
-                />
-              </span>
-            ) : (
-              <span>
-                <Image
-                  src={hideLogo}
-                  alt="logo"
-                  className="h-[1rem] w-[1rem]"
-                />
-              </span>
-            )}
-          </div>
+          <div>hide SideBar</div>
         </div>
       </motion.aside>
     </>
@@ -87,7 +65,7 @@ let Boards = () => {
   }, []);
   return (
     <>
-      <ul className="font-bold capitalize text-white">
+      <ul className="font-bold capitalize text-white border-2 h-[30rem] overflow-auto">
         {arrOfBoard.map((e, i) => {
           return (
             <li key={i}>
