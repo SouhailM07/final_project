@@ -22,7 +22,7 @@ export default function Menubar() {
             ALL BOARDS <span>(2)</span>
           </div>
           <Boards />
-          <button>
+          <button className="border-2 border-red-500 py-[1rem] hover:bg-white">
             <Image src={layoutLogo} alt="img" />
             <span>Create New Board</span>
           </button>
