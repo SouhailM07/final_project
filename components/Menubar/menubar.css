@@ -1,3 +1,62 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+aside {
+  @apply flex flex-col justify-between relative;
+  @apply w-[20rem] text-[1.2rem];
+  @apply bg-d_component text-white;
+}
+
+.showMenuBar {
+  @apply w-[25rem];
+}
+
+#Menubar-s1 {
+  @apply flex flex-col justify-between;
+  @apply h-[20rem];
+}
+
+#Menubar-s1 button {
+  @apply flex space-x-3;
+  @apply pl-[1rem];
+  @apply text-act;
+}
+
+#Menubar-s2 {
+  @apply flex flex-col justify-between;
+  @apply h-[10rem];
+}
+
+#ToggleMode {
+  @apply flex m-auto items-center justify-center rounded-xl;
+  @apply w-[95%] h-[5rem] space-x-[1rem];
+  @apply bg-d_body;
+}
+
+#ToggleMode button {
+  @apply rounded-full;
+  @apply w-[4rem] h-[2rem];
+  @apply bg-act;
+}
+
+#ToggleMode button div {
+  @apply rounded-full;
+  @apply h-[1.5rem] w-[1.5rem];
+  @apply bg-white;
+}
+
+#ToggleMode img {
+  @apply h-[2rem] w-[2rem];
+}
+
+aside ul li input[type="radio"] ~ label {
+  @apply flex rounded-r-full items-center space-x-3;
+  @apply py-[0.7rem] pl-[1rem] max-w-[15rem] my-[1rem];
+  @apply hover:bg-l_component hover:text-act;
+}
+
+input[type="radio"]:checked + label {
+  background-color: #4ade80;
+  color: white !important;
+}

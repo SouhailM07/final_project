@@ -1,11 +1,14 @@
 import "./mycontainer.css";
 // components
-import { Navbar } from "..";
+import { Navbar, Menubar } from "..";
 export default function MyContainer() {
   return (
     <>
-      <div className="h-screen bg-gray-900  ">
+      <div className="h-screen  bg-d_body ">
         <Navbar />
+        <main className="flex">
+          <Menubar />
+        </main>
       </div>
     </>
   );
