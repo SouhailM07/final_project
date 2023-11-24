@@ -74,7 +74,8 @@ let ToggleMode = () => {
 /*=======================================================================================*/
 
 let Boards = () => {
-  let arrOfBoard = ["platform", "marketing plan", "roadmap"];
+  // let arrOfBoard = ["platform", "marketing plan", "roadmap"];
+  let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
   let toggle_createBoard = useSelector(
     (state) => state.toggle_createBoard.toggle_createBoard
   );
@@ -83,23 +84,29 @@ let Boards = () => {
       "aside ul li input[type='radio'] ~ label"
     );
     boardsLabel[0].click();
+    console.log(arrOfBoards);
     // ! api
     // toggle_createBoard
-  }, []);
+  }, [toggle_createBoard]);
   return (
     <>
       <ul id="Boards">
-        {arrOfBoard.map((e, i) => {
+        {arrOfBoards.map((e, i) => {
           return (
             <li key={i}>
-              <input type="radio" id={e} name="projects" className="hidden" />
+              <input
+                type="radio"
+                id={e.id}
+                name="projects"
+                className="hidden"
+              />
 
               <label
-                htmlFor={e}
+                htmlFor={e.id}
                 // e.name -> api
               >
                 <Image src={layoutLogo} alt="logo" />
-                <span>{e}</span>
+                <span>{e.name}</span>
               </label>
             </li>
           );

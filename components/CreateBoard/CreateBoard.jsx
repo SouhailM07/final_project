@@ -5,10 +5,16 @@ import {
   toggle_createBoard_f,
   adding_boardName,
 } from "@/app/redux/reducers/createBoard";
+import {
+  add_board_reducer,
+  edit_newBoard_columns,
+  edit_newBoard_id,
+  edit_newBoard_name,
+} from "@/app/redux/reducers/add_boards";
 // style
 import "./createboard.css";
 // hooks
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useId } from "react";
 import axios from "axios";
 // assets
 import Image from "next/image";
@@ -20,9 +26,11 @@ import deleteLogo from "@/public/delete-left-solid.svg";
 /*=========================================================================================*/
 
 export default function CreateBoard() {
+  // toggle state to toggle sidebar [start]
   let toggle_createBoard = useSelector(
     (state) => state.toggle_createBoard.toggle_createBoard
   );
+  // toggle state to toggle sidebar [end]
   let dispatch = useDispatch();
   return (
     <>
@@ -36,7 +44,6 @@ export default function CreateBoard() {
             <h3>Add New Board</h3>
             <BoardName />
             <BoardColumns />
-            <CREATE_NEW_BOARD_BTN />
           </div>
         </div>
       )}
@@ -50,12 +57,17 @@ export default function CreateBoard() {
 
 let BoardName = () => {
   let dispatch = useDispatch();
+  let edited_newBoard = useSelector((state) => state.add_boards.newBoard);
   return (
     <>
       <div id="BoardName">
         <label htmlFor="boardName">Board Name</label>
         <input
-          onChange={(e) => dispatch(adding_boardName(e.target.value))}
+          onChange={(e) => {
+            // dispatch(adding_boardName(e.target.value))
+            dispatch(edit_newBoard_name(e.target.value));
+            console.log(edited_newBoard);
+          }}
           type="text"
           id="boardName"
           placeholder="e.g Web Design"
@@ -65,10 +77,10 @@ let BoardName = () => {
   );
 };
 
-let ADD_NEW_COLUMN_BTN = () => {
+let ADD_NEW_COLUMN_BTN = ({ fnc }) => {
   return (
     <>
-      <button id="ADD_NEW_COLUMN_BTN">
+      <button onClick={fnc} id="ADD_NEW_COLUMN_BTN">
         <Image
           src={plusLogo}
           alt=""
@@ -80,16 +92,25 @@ let ADD_NEW_COLUMN_BTN = () => {
   );
 };
 
-let CREATE_NEW_BOARD_BTN = () => {
-  let input_boardName = useSelector(
-    (state) => state.toggle_createBoard.input_boardName
+let CREATE_NEW_BOARD_BTN = ({ newBoard_state }) => {
+  let edited_newBoard = useSelector((state) => state.add_boards.newBoard);
+  let randomId = useId();
+  // changing the randomId when create new column btn is clicked
+  let toggle_createBoard = useSelector(
+    (state) => state.toggle_createBoard.toggle_createBoard
   );
-
-  let create_new_board_axios = async () => {
-    await axios.post("http://localhost:3000/api/boards", {
-      board_name: input_boardName,
-    });
-  };
+  useEffect(() => {
+    console.log("random Id changed");
+  }, [toggle_createBoard]);
+  //
+  // let input_boardName = useSelector(
+  //   (state) => state.toggle_createBoard.input_boardName
+  // );
+  // let create_new_board_axios = async () => {
+  //   await axios.post("http://localhost:3000/api/boards", {
+  //     board_name: input_boardName,
+  //   });
+  // };
 
   let dispatch = useDispatch();
   return (
@@ -98,7 +119,15 @@ let CREATE_NEW_BOARD_BTN = () => {
         id="CREATE_NEW_BOARD_BTN"
         onClick={() => {
           // create_new_board_axios();
-          dispatch(toggle_createBoard_f(false));
+          // ! activate after completing redux add_boards
+          if (edited_newBoard.name.length > 0) {
+            dispatch(toggle_createBoard_f(false));
+            dispatch(edit_newBoard_id(randomId));
+            dispatch(edit_newBoard_columns(newBoard_state));
+            dispatch(add_board_reducer());
+            console.log(newBoard_state);
+            console.log(edited_newBoard);
+          }
         }}
       >
         Create New Board
@@ -108,13 +137,48 @@ let CREATE_NEW_BOARD_BTN = () => {
 };
 
 let BoardColumns = () => {
-  // let arrOfTest = ["todo", "doing", "4", "5", "6"];
-  let [inputValues, setInputValues] = useState({
-    input1: "",
-    input2: "",
-  });
+  let [inputs, setInputs] = useState([
+    { input: "Todo", tasks: [] },
+    { input: "Doing", tasks: [] },
+  ]);
+  //   ====================================================================================
+  // ! ===========================[Board columns functions]================================
+  //   ====================================================================================
+  // todo :  ============================
+  // todo :  add new input to the columns
+  // todo :  ============================
+  let ADD_NEW_INPUT_f = () => {
+    const newInput = { [`input`]: "" };
+    setInputs([...inputs, newInput]);
+    console.log(inputs);
+  };
+  // todo :  =============================
+  // todo :  handle input content changing
+  // todo :  =============================
+  const handleInputChange = (inputInfo, index) => {
+    // Create a new array with the updated input value
+    const newInputs = [...inputs];
+    newInputs[index][`input`] = inputInfo.target.value;
+    // Update the state with the new array
+    setInputs(newInputs);
+  };
 
-  // let arrOfTest = [];
+  // todo :  ==================
+  // todo :  deleting an input
+  // todo :  ==================
+  const deleteInput = (index) => {
+    let newInputs = [...inputs];
+    // Remove the input at the specified index
+    newInputs = newInputs.filter((e, i) => {
+      return i !== index;
+    });
+    console.log(newInputs);
+    setInputs(newInputs);
+    console.log(inputs);
+  };
+  //   ====================================================================================
+  // * ===========================[ component section ]====================================
+  //   ====================================================================================
   return (
     <>
       <div id="BoardColumns">
@@ -122,12 +186,19 @@ let BoardColumns = () => {
         <div>
           {/* map with divs in atlas columns */}
           <ul>
-            {Object.keys(inputValues).map((e, i) => {
+            {inputs.map((e, i) => {
               return (
                 <li key={i}>
-                  <input type="text" value={e[e]} />
+                  <input
+                    onChange={(inputInfo) => {
+                      handleInputChange(inputInfo, i);
+                    }}
+                    type="text"
+                    value={e[`input`]}
+                  />
                   <Image
                     src={deleteLogo}
+                    onClick={() => deleteInput(i)}
                     alt=""
                     className="h-[2rem] w-[2rem] cursor-pointer "
                   />
@@ -135,10 +206,8 @@ let BoardColumns = () => {
               );
             })}
           </ul>
-          <ADD_NEW_COLUMN_BTN />
-        </div>
-        <div>
-          {/* map with divs in state inputs like password generator strength bars */}
+          <ADD_NEW_COLUMN_BTN fnc={() => ADD_NEW_INPUT_f()} />
+          <CREATE_NEW_BOARD_BTN newBoard_state={inputs} />
         </div>
       </div>
     </>
