@@ -5,7 +5,30 @@ let initialState = {
     {
       id: "shadow",
       name: "hello",
-      columns: [],
+      columns: [
+        {
+          input: "Todo",
+          tasks: [
+            {
+              taskName: "testing this task",
+              description:
+                "hello how are you am under the water please help me",
+              subtasks: [],
+            },
+          ],
+        },
+        {
+          input: "Doing",
+          tasks: [
+            {
+              taskName: "testing this task",
+              description:
+                "hello how are you am under the water please help me",
+              subtasks: [],
+            },
+          ],
+        },
+      ],
     },
   ],
   newBoard: {
