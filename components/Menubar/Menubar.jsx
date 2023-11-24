@@ -2,11 +2,12 @@
 // ! redux
 import { useDispatch, useSelector } from "react-redux";
 import { toggle_createBoard_f } from "@/app/redux/reducers/createBoard";
+import { select_the_board } from "@/app/redux/reducers/selected_board";
 // style
 import "./menubar.css";
 import { motion } from "framer-motion";
 // hooks
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import axios from "axios";
 // assets
 import Image from "next/image";
@@ -75,11 +76,15 @@ let ToggleMode = () => {
 
 let Boards = () => {
   // let arrOfBoard = ["platform", "marketing plan", "roadmap"];
+  let dispatch = useDispatch();
   let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
   let toggle_createBoard = useSelector(
     (state) => state.toggle_createBoard.toggle_createBoard
   );
-  useEffect(() => {
+  let selected_board = useSelector(
+    (state) => state.selected_board.selected_board
+  );
+  useLayoutEffect(() => {
     let boardsLabel = document.querySelectorAll(
       "aside ul li input[type='radio'] ~ label"
     );
@@ -103,6 +108,11 @@ let Boards = () => {
 
               <label
                 htmlFor={e.id}
+                onClick={() => {
+                  dispatch(select_the_board(e));
+                  console.log("check");
+                  console.log(selected_board);
+                }}
                 // e.name -> api
               >
                 <Image src={layoutLogo} alt="logo" />

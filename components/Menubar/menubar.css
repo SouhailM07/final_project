@@ -4,12 +4,8 @@
 
 aside {
   @apply flex flex-col justify-between relative;
-  @apply w-[20rem] text-[1.2rem];
+  @apply w-[25rem] text-[1.2rem];
   @apply bg-d_component text-white;
-}
-
-.showMenuBar {
-  @apply w-[25rem];
 }
 
 #Menubar-s1 {

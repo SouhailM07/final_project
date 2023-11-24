@@ -1,6 +1,6 @@
 import "./mycontainer.css";
 // components
-import { Navbar, Menubar, CreateBoard } from "..";
+import { Navbar, Menubar, Main, CreateBoard } from "..";
 export default function MyContainer() {
   return (
     <>
@@ -9,6 +9,7 @@ export default function MyContainer() {
         <CreateBoard />
         <main className="flex">
           <Menubar />
+          <Main />
         </main>
       </div>
     </>

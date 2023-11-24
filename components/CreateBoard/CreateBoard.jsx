@@ -148,7 +148,7 @@ let BoardColumns = () => {
   // todo :  add new input to the columns
   // todo :  ============================
   let ADD_NEW_INPUT_f = () => {
-    const newInput = { [`input`]: "" };
+    const newInput = { [`input`]: "", tasks: [] };
     setInputs([...inputs, newInput]);
     console.log(inputs);
   };
