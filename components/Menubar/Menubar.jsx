@@ -7,6 +7,7 @@ import "./menubar.css";
 import { motion } from "framer-motion";
 // hooks
 import { useState, useEffect } from "react";
+import axios from "axios";
 // assets
 import Image from "next/image";
 import layoutLogo from "@/public/bx-layout.svg";
@@ -15,9 +16,12 @@ import moonLogo from "@/public/moon-solid.svg";
 import hideLogo from "../../public/eye-slash-regular.svg";
 import showLogo from "../../public/eye-regular.svg";
 
+/*=======================================================================================*/
+// component section
+/*=======================================================================================*/
+
 export default function Menubar() {
   let [showMenuBar, setShowMenuBar] = useState(false);
-  let showBtn = ["showMenuBar", ""];
   let dispatch = useDispatch();
   return (
     <>
@@ -45,6 +49,10 @@ export default function Menubar() {
   );
 }
 
+/*=======================================================================================*/
+// small component section
+/*=======================================================================================*/
+
 let ToggleMode = () => {
   let [q, setQ] = useState(false);
 
@@ -63,22 +71,33 @@ let ToggleMode = () => {
   );
 };
 
+/*=======================================================================================*/
+
 let Boards = () => {
   let arrOfBoard = ["platform", "marketing plan", "roadmap"];
+  let toggle_createBoard = useSelector(
+    (state) => state.toggle_createBoard.toggle_createBoard
+  );
   useEffect(() => {
-    let boards = document.querySelectorAll(
+    let boardsLabel = document.querySelectorAll(
       "aside ul li input[type='radio'] ~ label"
     );
-    boards[0].click();
+    boardsLabel[0].click();
+    // ! api
+    // toggle_createBoard
   }, []);
   return (
     <>
-      <ul className="font-bold capitalize text-white border-2 h-[30rem] overflow-auto">
+      <ul id="Boards">
         {arrOfBoard.map((e, i) => {
           return (
             <li key={i}>
               <input type="radio" id={e} name="projects" className="hidden" />
-              <label htmlFor={e}>
+
+              <label
+                htmlFor={e}
+                // e.name -> api
+              >
                 <Image src={layoutLogo} alt="logo" />
                 <span>{e}</span>
               </label>

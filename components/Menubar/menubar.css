@@ -14,7 +14,7 @@ aside {
 
 #Menubar-s1 {
   @apply flex flex-col justify-between;
-  @apply h-[20rem];
+  @apply max-h-[32rem];
 }
 
 #Menubar-s1 button {
@@ -59,4 +59,10 @@ aside ul li input[type="radio"] ~ label {
 input[type="radio"]:checked + label {
   background-color: #4ade80;
   color: white !important;
+}
+
+#Boards {
+  @apply font-bold capitalize border-2;
+  @apply h-[40rem] overflow-auto;
+  @apply text-white;
 }

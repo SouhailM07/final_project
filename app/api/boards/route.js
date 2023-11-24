@@ -13,7 +13,8 @@ export async function POST(request) {
     await connectMongoose();
 
     const { board_name } = await request.json();
-    let newBoard = new Board({ board_name });
+    let newBoard = new Board();
+    newBoard.name = board_name;
     await newBoard.save();
     return NextResponse.json(
       { message: `new board was created ${board_name}` },

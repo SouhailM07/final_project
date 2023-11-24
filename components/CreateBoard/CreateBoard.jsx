@@ -1,15 +1,23 @@
 "use client";
 // ! redux
 import { useDispatch, useSelector } from "react-redux";
-import { toggle_createBoard_f } from "@/app/redux/reducers/createBoard";
+import {
+  toggle_createBoard_f,
+  adding_boardName,
+} from "@/app/redux/reducers/createBoard";
 // style
 import "./createboard.css";
 // hooks
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
 // assets
 import Image from "next/image";
 import plusLogo from "@/public/plus-solid.svg";
 import deleteLogo from "@/public/delete-left-solid.svg";
+
+/*=========================================================================================*/
+// component section
+/*=========================================================================================*/
 
 export default function CreateBoard() {
   let toggle_createBoard = useSelector(
@@ -19,12 +27,12 @@ export default function CreateBoard() {
   return (
     <>
       {toggle_createBoard && (
-        <div className="bg-[#0000008a] fixed top-0 flex justify-center items-center h-full w-full text-white z-[10] ">
+        <div id="CreateBoard">
           <div
             onClick={() => dispatch(toggle_createBoard_f(false))}
-            className=" h-full w-full absolute z-[1] "
+            id="CreateBoard-transparentBackground"
           ></div>
-          <div className="bg-d_component min-h-[25rem] relative z-[2] w-[32rem] px-[2rem] py-[2rem] rounded-xl flex flex-col justify-between">
+          <div id="CreateBoard-container">
             <h3>Add New Board</h3>
             <BoardName />
             <BoardColumns />
@@ -36,17 +44,21 @@ export default function CreateBoard() {
   );
 }
 
+/*=========================================================================================*/
+// small component section
+/*=========================================================================================*/
+
 let BoardName = () => {
+  let dispatch = useDispatch();
   return (
     <>
-      <div className="text-white my-[1rem] flex flex-col">
+      <div id="BoardName">
         <label htmlFor="boardName">Board Name</label>
         <input
+          onChange={(e) => dispatch(adding_boardName(e.target.value))}
           type="text"
-          name=""
           id="boardName"
           placeholder="e.g Web Design"
-          className="pl-[1rem] focus:outline-act focus:border-none bg-transparent border-2 border-gray-500 rounded-xl py-[0.7rem] mt-[8px]"
         />
       </div>
     </>
@@ -56,7 +68,7 @@ let BoardName = () => {
 let ADD_NEW_COLUMN_BTN = () => {
   return (
     <>
-      <button className="rounded-full my-[1rem] flex items-center justify-center py-[0.7rem] bg-gray-600 space-x-[1rem] font-bold text-[1.3rem] text-act w-full">
+      <button id="ADD_NEW_COLUMN_BTN">
         <Image
           src={plusLogo}
           alt=""
@@ -69,12 +81,25 @@ let ADD_NEW_COLUMN_BTN = () => {
 };
 
 let CREATE_NEW_BOARD_BTN = () => {
+  let input_boardName = useSelector(
+    (state) => state.toggle_createBoard.input_boardName
+  );
+
+  let create_new_board_axios = async () => {
+    await axios.post("http://localhost:3000/api/boards", {
+      board_name: input_boardName,
+    });
+  };
+
   let dispatch = useDispatch();
   return (
     <>
       <button
-        onClick={() => dispatch(toggle_createBoard_f(false))}
-        className=" bg-act  rounded-full flex  justify-center py-[0.7rem]  space-x-[1rem] font-bold text-[1.3rem] text-white w-full"
+        id="CREATE_NEW_BOARD_BTN"
+        onClick={() => {
+          // create_new_board_axios();
+          dispatch(toggle_createBoard_f(false));
+        }}
       >
         Create New Board
       </button>
@@ -83,35 +108,38 @@ let CREATE_NEW_BOARD_BTN = () => {
 };
 
 let BoardColumns = () => {
-  let arrOfTest = ["todo", "doing", "4", "5", "6"];
+  // let arrOfTest = ["todo", "doing", "4", "5", "6"];
+  let [inputValues, setInputValues] = useState({
+    input1: "",
+    input2: "",
+  });
+
   // let arrOfTest = [];
   return (
     <>
-      <h3>Board Columns</h3>
-      <div>
-        {/* map with divs in atlas columns */}
-        <ul className="w-full mb-[1rem]">
-          {arrOfTest.map((e, i) => {
-            return (
-              <li className="flex items-center justify-between " key={i}>
-                <input
-                  type="text"
-                  value={e}
-                  className="pl-[1rem] my-[0.5rem] w-[90%] focus:outline-act focus:border-none bg-transparent border-2 border-gray-500 rounded-xl py-[0.6rem] "
-                />
-                <Image
-                  src={deleteLogo}
-                  alt=""
-                  className="h-[2rem] w-[2rem] cursor-pointer "
-                />
-              </li>
-            );
-          })}
-        </ul>
-        <ADD_NEW_COLUMN_BTN />
-      </div>
-      <div>
-        {/* map with divs in state inputs like password generator strength bars */}
+      <div id="BoardColumns">
+        <h3>Board Columns</h3>
+        <div>
+          {/* map with divs in atlas columns */}
+          <ul>
+            {Object.keys(inputValues).map((e, i) => {
+              return (
+                <li key={i}>
+                  <input type="text" value={e[e]} />
+                  <Image
+                    src={deleteLogo}
+                    alt=""
+                    className="h-[2rem] w-[2rem] cursor-pointer "
+                  />
+                </li>
+              );
+            })}
+          </ul>
+          <ADD_NEW_COLUMN_BTN />
+        </div>
+        <div>
+          {/* map with divs in state inputs like password generator strength bars */}
+        </div>
       </div>
     </>
   );

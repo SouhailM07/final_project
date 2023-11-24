@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#CreateBoard {
+  @apply fixed top-0 flex justify-center items-center;
+  @apply h-full w-full z-[10];
+  @apply bg-[#0000008a] text-white;
+}
+
+#CreateBoard-transparentBackground {
+  @apply absolute;
+  @apply h-full w-full z-[1];
+}
+
+#CreateBoard-container {
+  @apply relative rounded-xl flex flex-col justify-between;
+  @apply min-h-[25rem] z-[2] w-[32rem] px-[2rem] py-[2rem];
+  @apply bg-d_component;
+}
+
+#BoardName {
+  @apply flex flex-col;
+  @apply my-[1rem];
+  @apply text-white;
+}
+
+#BoardName input {
+  @apply focus:outline-none focus:border-act  border-2 border-gray-500 rounded-xl;
+  @apply pl-[1rem] py-[0.7rem] mt-[8px];
+  @apply bg-transparent;
+}
+
+#ADD_NEW_COLUMN_BTN {
+  @apply rounded-full flex items-center justify-center font-bold;
+  @apply my-[1rem] py-[0.7rem] space-x-[1rem] text-[1.3rem] w-full;
+  @apply bg-gray-600 text-act;
+}
+
+#CREATE_NEW_BOARD_BTN {
+  @apply rounded-full flex  justify-center  font-bold;
+  @apply py-[0.7rem] space-x-[1rem] text-[1.3rem] w-full;
+  @apply bg-act text-white;
+}
+
+#BoardColumns ul {
+  @apply w-full mb-[1rem];
+}
+
+#BoardColumns ul li {
+  @apply flex items-center justify-between;
+}
+
+#BoardColumns ul li input {
+  @apply focus:outline-none focus:border-act border-2 border-gray-500 rounded-xl;
+  @apply pl-[1rem] my-[0.5rem] w-[90%] py-[0.6rem];
+  @apply bg-transparent;
+}
