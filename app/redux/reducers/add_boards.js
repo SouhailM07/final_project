@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
   arrOfBoards: [],
-
+  //
   newBoard: {
     id: "",
     name: "",
@@ -17,6 +17,8 @@ let initialState = {
     subtasks: [],
   },
   task_index: 0,
+  //
+  selected_task: "",
 };
 
 let add_boards_slice = createSlice({
@@ -73,6 +75,10 @@ let add_boards_slice = createSlice({
         subtasks: [],
       };
     },
+    //
+    select_the_task: (state, action) => {
+      state.selected_task = action.payload;
+    },
   },
 });
 
@@ -89,5 +95,7 @@ export const {
   edit_taskName,
   add_newTask_reducer,
   edit_tasks_index,
+  //
+  select_the_task,
 } = add_boards_slice.actions;
 export default add_boards_slice.reducer;

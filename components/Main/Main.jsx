@@ -26,10 +26,13 @@ export default function Main() {
                 {e.tasks.map((e, i) => {
                   return (
                     <li
+                      onClick={() => {
+                        console.log(e);
+                      }}
                       key={i}
-                      className="flex flex-col justify-around px-[1rem] h-[6rem] bg-d_component rounded-xl"
+                      className="flex flex-col my-[1rem] justify-around px-[1rem] h-[6rem] bg-d_component rounded-xl"
                     >
-                      <h2 className="text-[1.7rem] ">{e.taskName}</h2>
+                      <h2 className="text-[1.5rem] ">{e.taskName}</h2>
                       <div className="space-x-1 ">
                         <span>0</span>
                         <span>of</span>

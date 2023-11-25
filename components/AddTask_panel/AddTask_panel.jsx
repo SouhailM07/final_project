@@ -223,9 +223,9 @@ let CREATE_TASK_BTN = ({ subtasks_data }) => {
       <button
         id="CREATE_TASK_BTN"
         onClick={async () => {
+          dispatch(edit_subtasks(subtasks_data));
           if (task_info.taskName.length > 0) {
             await dispatch(add_newTask_reducer());
-            await dispatch(edit_subtasks(subtasks_data));
             console.log("======================");
             console.log(selected_board);
             console.log("======================");
