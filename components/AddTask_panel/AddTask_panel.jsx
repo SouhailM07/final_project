@@ -1,4 +1,19 @@
 "use client";
+// ! redux
+import { useDispatch, useSelector } from "react-redux";
+import { toggle_addTask_f } from "@/app/redux/reducers/addTask_panel";
+import {
+  edit_selected_board_id,
+  update_board,
+} from "@/app/redux/reducers/add_boards";
+import {
+  edit_description,
+  edit_subtasks,
+  edit_taskName,
+  add_newTask_reducer,
+  edit_tasks_index,
+  select_the_board,
+} from "@/app/redux/reducers/selected_board";
 // hooks
 import { useState, useEffect } from "react";
 // style
@@ -13,17 +28,29 @@ import plusLogo from "../../public/plus-solid.svg";
 /*=========================================================================================*/
 
 export default function AddTask_panel() {
+  let toggle_addTask = useSelector(
+    (state) => state.toggle_addTask.toggle_addTask
+  );
+  //
+  let dispatch = useDispatch();
   return (
     <>
-      <div id="AddTask_panel">
-        <div id="AddTask_panel-transparent_background"></div>
-        <div id="AddTask_panel-container">
-          <h2 className="text-[1.6rem]">Add New Task</h2>
-          <TaskTitle />
-          <TaskDescription />
-          <Subtasks />
+      {toggle_addTask && (
+        <div id="AddTask_panel">
+          <div
+            onClick={() => {
+              dispatch(toggle_addTask_f(false));
+            }}
+            id="AddTask_panel-transparent_background"
+          ></div>
+          <div id="AddTask_panel-container">
+            <h2 className="text-[1.6rem] italic">Add New Task</h2>
+            <TaskTitle />
+            <TaskDescription />
+            <Subtasks />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
@@ -33,22 +60,38 @@ export default function AddTask_panel() {
 /*=========================================================================================*/
 
 let TaskTitle = () => {
+  let dispatch = useDispatch();
   return (
     <>
       <div id="TaskTitle" className="">
         <h3>Title</h3>
-        <input type="text" placeholder="e.g Take coffee break" />
+        <input
+          type="text"
+          placeholder="e.g Take coffee break"
+          onChange={(e) => {
+            dispatch(edit_taskName(e.target.value));
+          }}
+        />
       </div>
     </>
   );
 };
 
 let TaskDescription = () => {
+  let newTask_info = useSelector((state) => state.selected_board.newTask);
+  let dispatch = useDispatch();
   return (
     <>
       <div id="TaskDescription">
         <h3>Description</h3>
-        <textarea name="" id="" className="w-full h-[8rem]"></textarea>
+        <textarea
+          name=""
+          id=""
+          className="w-full h-[8rem]"
+          onChange={(e) => {
+            dispatch(edit_description(e.target.value));
+          }}
+        ></textarea>
       </div>
     </>
   );
@@ -59,6 +102,38 @@ let Subtasks = () => {
     { subTask: "", state: false, placeholder: "e.g Make coffee" },
     { subTask: "", state: false, placeholder: "e.g Drink coffee & smile" },
   ]);
+  //   ====================================================================================
+  // ! ============================[Subtasks functions]====================================
+  //   ====================================================================================
+  // todo :  ============================
+  // todo :  add new subtask to the subtasks
+  // todo :  ============================
+  let ADD_NEW_SUBTASK_f = () => {
+    const newSubtask = { [`subtask`]: "", state: false };
+    setSubtasks([...subtasks, newSubtask]);
+  };
+  // todo :  =============================
+  // todo :  handle input content changing
+  // todo :  =============================
+  const handleInputChange = (inputInfo, index) => {
+    // Create a new array with the updated input value
+    const newSubtasks = [...subtasks];
+    newSubtasks[index][`subTask`] = inputInfo.target.value;
+    // Update the state with the new array
+    setSubtasks(newSubtasks);
+  };
+
+  // todo :  ==================
+  // todo :  deleting an input
+  // todo :  ==================
+  const deleteSubtask = (index) => {
+    let newSubtasks = [...subtasks];
+    // Remove the input at the specified index
+    newSubtasks = newSubtasks.filter((e, i) => {
+      return i !== index;
+    });
+    setSubtasks(newSubtasks);
+  };
   return (
     <>
       <div id="Subtasks">
@@ -68,13 +143,16 @@ let Subtasks = () => {
             return (
               <li key={i}>
                 <input
-                  onChange={(inputInfo) => {}}
+                  onChange={(inputInfo) => {
+                    handleInputChange(inputInfo, i);
+                  }}
                   type="text"
                   placeholder={e?.placeholder}
                   value={e[`subTask`]}
                 />
                 <Image
                   src={deleteLogo}
+                  onClick={() => deleteSubtask(i)}
                   alt=""
                   className="h-[2rem] w-[2rem] cursor-pointer "
                 />
@@ -82,21 +160,21 @@ let Subtasks = () => {
             );
           })}
         </ul>
-        <ADD_NEW_SUBTASK_BTN />
+        <ADD_NEW_SUBTASK_BTN fnc={() => ADD_NEW_SUBTASK_f()} />
         <StatusTask />
-        <CREATE_TASK_BTN />
+        <CREATE_TASK_BTN subtasks_data={subtasks} />
       </div>
     </>
   );
 };
 
-let ADD_NEW_SUBTASK_BTN = () => {
+let ADD_NEW_SUBTASK_BTN = ({ fnc }) => {
   return (
     <>
-      <button id="ADD_NEW_SUBTASK_BTN">
+      <button id="ADD_NEW_SUBTASK_BTN" onClick={fnc}>
         <Image
           src={plusLogo}
-          alt=""
+          alt="plus logo"
           className="h-[1.5rem] w-[1.5rem] cursor-pointer"
         />
         <span>Add New Subtasks</span>
@@ -106,35 +184,61 @@ let ADD_NEW_SUBTASK_BTN = () => {
 };
 
 let StatusTask = () => {
+  // import the selected board
+  let dispatch = useDispatch();
+  let selected_board = useSelector(
+    (state) => state.selected_board.selected_board
+  );
   return (
     <>
-      <div>
+      <div id="StatusTask">
         <h3>STATUS</h3>
         <select
-          name=""
-          id=""
-          className="my-[0.8rem] pl-[1rem] py-[0.6rem] mt-[8px]  w-full border-2 focus:outline-none focus:border-act  border-gray-500 rounded-xl bg-transparent"
-        ></select>
+          onChange={(e) => {
+            dispatch(edit_tasks_index(e.target.value));
+            console.log(`the value is `);
+            console.log(e.target.value);
+          }}
+        >
+          {selected_board.columns.map((e, i) => {
+            return (
+              <option key={i} value={i}>
+                {e[`input`]}
+              </option>
+            );
+          })}
+        </select>
       </div>
     </>
   );
 };
 
-let CREATE_TASK_BTN = () => {
+let CREATE_TASK_BTN = ({ subtasks_data }) => {
+  let dispatch = useDispatch();
+  let selected_board = useSelector(
+    (state) => state.selected_board.selected_board
+  );
+  let task_info = useSelector((state) => state.selected_board.newTask);
+  let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
+  let idOf = useSelector((state) => state.add_boards.selected_board_id);
   return (
     <>
       <button
         id="CREATE_TASK_BTN"
-        onClick={() => {
-          // create_new_board_axios();
-          // ! activate after completing redux add_boards
-          // if (edited_newBoard.name.length > 0) {
-          //   dispatch(toggle_createBoard_f(false));
-          //   dispatch(edit_newBoard_id(randomId));
-          //   dispatch(edit_newBoard_columns(newBoard_state));
-          //   dispatch(add_board_reducer());
-          //   console.log(newBoard_state);
-          //   console.log(edited_newBoard);}
+        onClick={async () => {
+          if (task_info.taskName.length > 0) {
+            await dispatch(add_newTask_reducer());
+            await dispatch(edit_subtasks(subtasks_data));
+            console.log("======================");
+            console.log(selected_board);
+            console.log("======================");
+            await dispatch(edit_selected_board_id(selected_board.id));
+            await dispatch(update_board(selected_board));
+            // console.log("======================");
+            // console.log(arrOfBoards);
+            // console.log("======================");
+            dispatch(toggle_addTask_f(false));
+          }
         }}
       >
         Create Task

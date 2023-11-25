@@ -84,15 +84,19 @@ let Boards = () => {
   let selected_board = useSelector(
     (state) => state.selected_board.selected_board
   );
-  useLayoutEffect(() => {
+  let toggle_addTask = useSelector(
+    (state) => state.toggle_addTask.toggle_addTask
+  );
+  useEffect(() => {
     let boardsLabel = document.querySelectorAll(
       "aside ul li input[type='radio'] ~ label"
     );
-    boardsLabel[0].click();
+    // boardsLabel[0].click();
     console.log(arrOfBoards);
+    console.log("Menubar updated");
     // ! api
     // toggle_createBoard
-  }, [toggle_createBoard]);
+  }, [arrOfBoards]);
   return (
     <>
       <ul id="Boards">

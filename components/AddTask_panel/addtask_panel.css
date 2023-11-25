@@ -25,6 +25,12 @@
   @apply bg-transparent;
 }
 
+.StatusTask-option {
+  @apply focus:outline-none focus:border-act  border-2 border-gray-500 rounded-xl;
+  @apply pl-[1rem] py-[0.7rem] mt-[8px] w-full;
+  @apply bg-transparent;
+}
+
 #TaskDescription textarea {
   @apply focus:outline-none focus:border-act  border-2 border-gray-500 rounded-xl;
   @apply pl-[1rem] py-[0.7rem] mt-[8px] w-full;
@@ -33,6 +39,12 @@
 
 #Subtasks ul {
   @apply w-full mb-[1rem];
+}
+
+#StatusTask select {
+  @apply border-2 focus:outline-none focus:border-act  border-gray-500 rounded-xl;
+  @apply my-[0.8rem] pl-[1rem] py-[0.6rem] mt-[8px] w-full;
+  @apply bg-transparent;
 }
 
 #Subtasks ul li {
@@ -55,4 +67,8 @@
   @apply rounded-full flex  justify-center  font-bold;
   @apply py-[0.6rem] space-x-[1rem] text-[1.1rem] w-full;
   @apply bg-act text-white;
+}
+
+select > option {
+  color: black;
 }

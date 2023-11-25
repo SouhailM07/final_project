@@ -54,7 +54,7 @@ aside ul li input[type="radio"] ~ label {
 
 input[type="radio"]:checked + label {
   background-color: #4ade80;
-  color: white !important;
+  color: white;
 }
 
 #Boards {

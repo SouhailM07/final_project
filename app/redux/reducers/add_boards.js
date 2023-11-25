@@ -1,41 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
-  arrOfBoards: [
-    {
-      id: "shadow",
-      name: "hello",
-      columns: [
-        {
-          input: "Todo",
-          tasks: [
-            {
-              taskName: "testing this task",
-              description:
-                "hello how are you am under the water please help me",
-              subtasks: [],
-            },
-          ],
-        },
-        {
-          input: "Doing",
-          tasks: [
-            {
-              taskName: "testing this task",
-              description:
-                "hello how are you am under the water please help me",
-              subtasks: [],
-            },
-          ],
-        },
-      ],
-    },
-  ],
+  arrOfBoards: [],
+
   newBoard: {
     id: "",
     name: "",
     columns: [],
   },
+  selected_board_id: "",
 };
 
 let add_boards_slice = createSlice({
@@ -54,6 +27,18 @@ let add_boards_slice = createSlice({
     edit_newBoard_columns: (state, action) => {
       state.newBoard.columns = action.payload;
     },
+    update_board: (state, action) => {
+      const updatedArrOfBoards = state.arrOfBoards.map((board) => {
+        return board.id == state.selected_board_id
+          ? (board = action.payload)
+          : board;
+      });
+
+      state.arrOfBoards = updatedArrOfBoards;
+    },
+    edit_selected_board_id: (state, action) => {
+      state.selected_board_id = action.payload;
+    },
   },
 });
 
@@ -62,5 +47,7 @@ export const {
   edit_newBoard_name,
   edit_newBoard_id,
   edit_newBoard_columns,
+  update_board,
+  edit_selected_board_id,
 } = add_boards_slice.actions;
 export default add_boards_slice.reducer;

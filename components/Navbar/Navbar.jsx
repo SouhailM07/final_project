@@ -1,6 +1,7 @@
 "use client";
 // !redux
 import { useDispatch, useSelector } from "react-redux";
+import { toggle_addTask_f } from "@/app/redux/reducers/addTask_panel";
 //
 import "./navbar.css";
 // assets
@@ -14,6 +15,12 @@ export default function Navbar() {
   let selected_board = useSelector(
     (state) => state.selected_board.selected_board
   );
+  // redux state to toggle add task panel
+  let toggle_addTask = useSelector(
+    (state) => state.toggle_addTask.toggle_addTask
+  );
+  //
+  let dispatch = useDispatch();
   return (
     <>
       <nav>
@@ -25,7 +32,12 @@ export default function Navbar() {
           <div id="Navbar-s1-boardName">{selected_board.name}</div>
         </div>
         <div id="Navbar-s2">
-          <button id="Navbar-s2-addBtn">
+          <button
+            onClick={() => {
+              dispatch(toggle_addTask_f(true));
+            }}
+            id="Navbar-s2-addBtn"
+          >
             <Image src={plusLogo} alt="" className="h-[1rem] w-[1rem]" />
             <span>Add New Task</span>
           </button>
