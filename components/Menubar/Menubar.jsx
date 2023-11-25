@@ -2,7 +2,7 @@
 // ! redux
 import { useDispatch, useSelector } from "react-redux";
 import { toggle_createBoard_f } from "@/app/redux/reducers/createBoard";
-import { select_the_board } from "@/app/redux/reducers/selected_board";
+import { select_the_board } from "@/app/redux/reducers/add_boards";
 // style
 import "./menubar.css";
 import { motion } from "framer-motion";
@@ -80,9 +80,7 @@ let Boards = () => {
   // let arrOfBoard = ["platform", "marketing plan", "roadmap"];
   let dispatch = useDispatch();
   let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
-  let selected_board = useSelector(
-    (state) => state.selected_board.selected_board
-  );
+  let selected_board = useSelector((state) => state.add_boards.selected_board);
   let toggle_addTask = useSelector(
     (state) => state.toggle_addTask.toggle_addTask
   );

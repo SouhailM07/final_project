@@ -4,16 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggle_addTask_f } from "@/app/redux/reducers/addTask_panel";
 import {
   edit_selected_board_id,
-  update_board,
-} from "@/app/redux/reducers/add_boards";
-import {
   edit_description,
   edit_subtasks,
   edit_taskName,
   add_newTask_reducer,
   edit_tasks_index,
   select_the_board,
-} from "@/app/redux/reducers/selected_board";
+  update_board,
+} from "@/app/redux/reducers/add_boards";
 // hooks
 import { useState, useEffect } from "react";
 // style
@@ -80,7 +78,7 @@ let TaskTitle = () => {
 };
 
 let TaskDescription = () => {
-  let newTask_info = useSelector((state) => state.selected_board.newTask);
+  let newTask_info = useSelector((state) => state.add_boards.newTask);
   let dispatch = useDispatch();
   return (
     <>
@@ -188,9 +186,7 @@ let ADD_NEW_SUBTASK_BTN = ({ fnc }) => {
 let StatusTask = () => {
   // import the selected board
   let dispatch = useDispatch();
-  let selected_board = useSelector(
-    (state) => state.selected_board.selected_board
-  );
+  let selected_board = useSelector((state) => state.add_boards.selected_board);
   return (
     <>
       <div id="StatusTask">
@@ -217,11 +213,9 @@ let StatusTask = () => {
 
 let CREATE_TASK_BTN = ({ subtasks_data }) => {
   let dispatch = useDispatch();
-  let selected_board = useSelector(
-    (state) => state.selected_board.selected_board
-  );
-  let somethig = useSelector((state) => state.selected_board.task_index);
-  let task_info = useSelector((state) => state.selected_board.newTask);
+  let selected_board = useSelector((state) => state.add_boards.selected_board);
+  let somethig = useSelector((state) => state.add_boards.task_index);
+  let task_info = useSelector((state) => state.add_boards.newTask);
   // let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
   // let idOf = useSelector((state) => state.add_boards.selected_board_id);
   return (

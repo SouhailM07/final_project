@@ -9,6 +9,14 @@ let initialState = {
     columns: [],
   },
   selected_board_id: "",
+  //
+  selected_board: "",
+  newTask: {
+    taskName: "",
+    description: "",
+    subtasks: [],
+  },
+  task_index: 0,
 };
 
 let add_boards_slice = createSlice({
@@ -27,10 +35,10 @@ let add_boards_slice = createSlice({
     edit_newBoard_columns: (state, action) => {
       state.newBoard.columns = action.payload;
     },
-    update_board: (state, action) => {
+    update_board: (state) => {
       const updatedArrOfBoards = state.arrOfBoards.map((board) => {
         return board.id == state.selected_board_id
-          ? (board = action.payload)
+          ? (board = state.selected_board)
           : board;
       });
 
@@ -38,6 +46,32 @@ let add_boards_slice = createSlice({
     },
     edit_selected_board_id: (state, action) => {
       state.selected_board_id = action.payload;
+    },
+    //
+    select_the_board: (state, action) => {
+      state.selected_board = action.payload;
+    },
+    edit_taskName: (state, action) => {
+      state.newTask.taskName = action.payload;
+    },
+    edit_description: (state, action) => {
+      state.newTask.description = action.payload;
+    },
+    edit_subtasks: (state, action) => {
+      state.newTask.subtasks = action.payload;
+    },
+    edit_tasks_index: (state, action) => {
+      state.task_index = action.payload;
+    },
+    add_newTask_reducer: (state, action) => {
+      // state.newTask.subtasks.push(action.payload);
+      state.selected_board.columns[+state.task_index].tasks.push(state.newTask);
+      // modify the original selected board in arr of Boards
+      state.newTask = {
+        taskName: "",
+        description: "",
+        subtasks: [],
+      };
     },
   },
 });
@@ -49,5 +83,11 @@ export const {
   edit_newBoard_columns,
   update_board,
   edit_selected_board_id,
+  select_the_board,
+  edit_description,
+  edit_subtasks,
+  edit_taskName,
+  add_newTask_reducer,
+  edit_tasks_index,
 } = add_boards_slice.actions;
 export default add_boards_slice.reducer;

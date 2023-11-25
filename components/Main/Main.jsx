@@ -7,9 +7,7 @@ import { useEffect, useState } from "react";
 import "./main.css";
 
 export default function Main() {
-  let selected_board = useSelector(
-    (state) => state.selected_board.selected_board
-  );
+  let selected_board = useSelector((state) => state.add_boards.selected_board);
   let toggle_addTask = useSelector(
     (state) => state.toggle_addTask.toggle_addTask
   );

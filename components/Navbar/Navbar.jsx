@@ -12,9 +12,7 @@ import kanbanLogo from "@/public/bars-solid.svg";
 //
 
 export default function Navbar() {
-  let selected_board = useSelector(
-    (state) => state.selected_board.selected_board
-  );
+  let selected_board = useSelector((state) => state.add_boards.selected_board);
   // redux state to toggle add task panel
   let toggle_addTask = useSelector(
     (state) => state.toggle_addTask.toggle_addTask
