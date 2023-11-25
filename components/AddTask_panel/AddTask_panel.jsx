@@ -32,7 +32,9 @@ export default function AddTask_panel() {
     (state) => state.toggle_addTask.toggle_addTask
   );
   //
+
   let dispatch = useDispatch();
+  useEffect(() => {}, [toggle_addTask]);
   return (
     <>
       {toggle_addTask && (
@@ -99,8 +101,8 @@ let TaskDescription = () => {
 
 let Subtasks = () => {
   let [subtasks, setSubtasks] = useState([
-    { subTask: "", state: false, placeholder: "e.g Make coffee" },
-    { subTask: "", state: false, placeholder: "e.g Drink coffee & smile" },
+    { subtask: "", state: false, placeholder: "e.g Make coffee" },
+    { subtask: "", state: false, placeholder: "e.g Drink coffee & smile" },
   ]);
   //   ====================================================================================
   // ! ============================[Subtasks functions]====================================
@@ -118,7 +120,7 @@ let Subtasks = () => {
   const handleInputChange = (inputInfo, index) => {
     // Create a new array with the updated input value
     const newSubtasks = [...subtasks];
-    newSubtasks[index][`subTask`] = inputInfo.target.value;
+    newSubtasks[index][`subtask`] = inputInfo.target.value;
     // Update the state with the new array
     setSubtasks(newSubtasks);
   };
@@ -218,9 +220,10 @@ let CREATE_TASK_BTN = ({ subtasks_data }) => {
   let selected_board = useSelector(
     (state) => state.selected_board.selected_board
   );
+  let somethig = useSelector((state) => state.selected_board.task_index);
   let task_info = useSelector((state) => state.selected_board.newTask);
-  let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
-  let idOf = useSelector((state) => state.add_boards.selected_board_id);
+  // let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
+  // let idOf = useSelector((state) => state.add_boards.selected_board_id);
   return (
     <>
       <button
@@ -237,6 +240,9 @@ let CREATE_TASK_BTN = ({ subtasks_data }) => {
             // console.log("======================");
             // console.log(arrOfBoards);
             // console.log("======================");
+            console.log(somethig);
+            dispatch(edit_tasks_index(0));
+            console.log(somethig);
             dispatch(toggle_addTask_f(false));
           }
         }}

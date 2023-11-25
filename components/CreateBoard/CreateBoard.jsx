@@ -57,7 +57,6 @@ export default function CreateBoard() {
 
 let BoardName = () => {
   let dispatch = useDispatch();
-  let edited_newBoard = useSelector((state) => state.add_boards.newBoard);
   return (
     <>
       <div id="BoardName">
@@ -66,7 +65,6 @@ let BoardName = () => {
           onChange={(e) => {
             // dispatch(adding_boardName(e.target.value))
             dispatch(edit_newBoard_name(e.target.value));
-            console.log(edited_newBoard);
           }}
           type="text"
           id="boardName"
@@ -102,29 +100,20 @@ let CREATE_NEW_BOARD_BTN = ({ newBoard_state }) => {
   useEffect(() => {
     console.log("random Id changed");
   }, [toggle_createBoard]);
-  //
-  // let input_boardName = useSelector(
-  //   (state) => state.toggle_createBoard.input_boardName
-  // );
-  // let create_new_board_axios = async () => {
-  //   await axios.post("http://localhost:3000/api/boards", {
-  //     board_name: input_boardName,
-  //   });
-  // };
 
   let dispatch = useDispatch();
   return (
     <>
       <button
         id="CREATE_NEW_BOARD_BTN"
-        onClick={() => {
+        onClick={async () => {
           // create_new_board_axios();
           // ! activate after completing redux add_boards
           if (edited_newBoard.name.length > 0) {
-            dispatch(toggle_createBoard_f(false));
-            dispatch(edit_newBoard_id(randomId));
-            dispatch(edit_newBoard_columns(newBoard_state));
-            dispatch(add_board_reducer());
+            await dispatch(edit_newBoard_id(randomId));
+            await dispatch(edit_newBoard_columns(newBoard_state));
+            await dispatch(add_board_reducer());
+            await dispatch(toggle_createBoard_f(false));
             console.log(newBoard_state);
             console.log(edited_newBoard);
           }

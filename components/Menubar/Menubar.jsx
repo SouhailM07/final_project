@@ -24,6 +24,8 @@ import showLogo from "../../public/eye-regular.svg";
 export default function Menubar() {
   let [showMenuBar, setShowMenuBar] = useState(false);
   let dispatch = useDispatch();
+  let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
+  useEffect(() => {}, [arrOfBoards]);
   return (
     <>
       <motion.aside animate={{ x: showMenuBar ? "-20rem" : 0 }}>
@@ -78,22 +80,23 @@ let Boards = () => {
   // let arrOfBoard = ["platform", "marketing plan", "roadmap"];
   let dispatch = useDispatch();
   let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
-  let toggle_createBoard = useSelector(
-    (state) => state.toggle_createBoard.toggle_createBoard
-  );
   let selected_board = useSelector(
     (state) => state.selected_board.selected_board
   );
   let toggle_addTask = useSelector(
     (state) => state.toggle_addTask.toggle_addTask
   );
-  useEffect(() => {
+  useLayoutEffect(() => {
     let boardsLabel = document.querySelectorAll(
       "aside ul li input[type='radio'] ~ label"
     );
     // boardsLabel[0].click();
     console.log(arrOfBoards);
     console.log("Menubar updated");
+    console.log("check this arr of boards");
+    console.log(arrOfBoards);
+    console.log("check this selected board");
+    console.log(selected_board);
     // ! api
     // toggle_createBoard
   }, [arrOfBoards]);
@@ -114,8 +117,8 @@ let Boards = () => {
                 htmlFor={e.id}
                 onClick={() => {
                   dispatch(select_the_board(e));
-                  console.log("check");
-                  console.log(selected_board);
+                  console.log("check this selected board");
+                  console.log(e);
                 }}
                 // e.name -> api
               >
