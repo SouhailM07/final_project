@@ -21,23 +21,27 @@ import Image from "next/image";
 import plusLogo from "@/public/plus-solid.svg";
 import deleteLogo from "@/public/delete-left-solid.svg";
 
+//!=====================[zustand start]=====================================================
+import useToggleStore from "@/app/zustand/toggle";
+//!=====================[zustand end]=====================================================
+
 /*=========================================================================================*/
 // component section
 /*=========================================================================================*/
 
 export default function CreateBoard() {
   // toggle state to toggle sidebar [start]
-  let toggle_createBoard = useSelector(
-    (state) => state.toggle_createBoard.toggle_createBoard
-  );
+  const createBoard_tg = useToggleStore((state) => state.createBoard_tg);
+  const createBoard_tg_r = useToggleStore((state) => state.createBoard_tg_r);
   // toggle state to toggle sidebar [end]
-  let dispatch = useDispatch();
   return (
     <>
-      {toggle_createBoard && (
+      {createBoard_tg && (
         <div id="CreateBoard">
           <div
-            onClick={() => dispatch(toggle_createBoard_f(false))}
+            onClick={() => {
+              createBoard_tg_r(false);
+            }}
             id="CreateBoard-transparentBackground"
           ></div>
           <div id="CreateBoard-container">
@@ -100,7 +104,7 @@ let CREATE_NEW_BOARD_BTN = ({ newBoard_state }) => {
   useEffect(() => {
     console.log("random Id changed");
   }, [toggle_createBoard]);
-
+  const createBoard_tg_r = useToggleStore((state) => state.createBoard_tg_r);
   let dispatch = useDispatch();
   return (
     <>
@@ -113,7 +117,7 @@ let CREATE_NEW_BOARD_BTN = ({ newBoard_state }) => {
             await dispatch(edit_newBoard_id(randomId));
             await dispatch(edit_newBoard_columns(newBoard_state));
             await dispatch(add_board_reducer());
-            await dispatch(toggle_createBoard_f(false));
+            createBoard_tg_r(false);
             console.log(newBoard_state);
             console.log(edited_newBoard);
           }

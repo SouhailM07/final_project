@@ -1,7 +1,6 @@
 "use client";
 // ! redux
 import { useDispatch, useSelector } from "react-redux";
-import { toggle_createBoard_f } from "@/app/redux/reducers/createBoard";
 import { select_the_board } from "@/app/redux/reducers/add_boards";
 // style
 import "./menubar.css";
@@ -17,15 +16,18 @@ import moonLogo from "@/public/moon-solid.svg";
 import hideLogo from "../../public/eye-slash-regular.svg";
 import showLogo from "../../public/eye-regular.svg";
 
+import useToggleStore from "@/app/zustand/toggle";
 /*=======================================================================================*/
 // component section
 /*=======================================================================================*/
 
 export default function Menubar() {
   let [showMenuBar, setShowMenuBar] = useState(false);
-  let dispatch = useDispatch();
   let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
   useEffect(() => {}, [arrOfBoards]);
+
+  //
+  const createBoard_tg_r = useToggleStore((state) => state.createBoard_tg_r);
   return (
     <>
       <motion.aside animate={{ x: showMenuBar ? "-20rem" : 0 }}>
@@ -35,7 +37,10 @@ export default function Menubar() {
           </div>
           <Boards />
           <button
-            onClick={() => dispatch(toggle_createBoard_f(true))}
+            onClick={() => {
+              createBoard_tg_r(true);
+              // dispatch(toggle_createBoard_f(true));
+            }}
             className="border-2 border-red-500 py-[1rem] hover:bg-white"
           >
             <Image src={layoutLogo} alt="img" />

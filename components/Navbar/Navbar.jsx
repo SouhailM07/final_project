@@ -1,7 +1,6 @@
 "use client";
 // !redux
-import { useDispatch, useSelector } from "react-redux";
-import { toggle_addTask_f } from "@/app/redux/reducers/addTask_panel";
+import { useSelector } from "react-redux";
 //
 import "./navbar.css";
 // assets
@@ -10,15 +9,13 @@ import plusLogo from "@/public/plus-solid.svg";
 import editLogo from "@/public/ellipsis-vertical-solid.svg";
 import kanbanLogo from "@/public/bars-solid.svg";
 //
+import useToggleStore from "@/app/zustand/toggle";
 
 export default function Navbar() {
+  const addTask_tg = useToggleStore((state) => state.addTask_tg);
+  const addTask_tg_r = useToggleStore((state) => state.addTask_tg_r);
   let selected_board = useSelector((state) => state.add_boards.selected_board);
   // redux state to toggle add task panel
-  let toggle_addTask = useSelector(
-    (state) => state.toggle_addTask.toggle_addTask
-  );
-  //
-  let dispatch = useDispatch();
   return (
     <>
       <nav>
@@ -32,7 +29,7 @@ export default function Navbar() {
         <div id="Navbar-s2">
           <button
             onClick={() => {
-              dispatch(toggle_addTask_f(true));
+              addTask_tg_r(true);
             }}
             id="Navbar-s2-addBtn"
           >

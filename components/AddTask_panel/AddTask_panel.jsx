@@ -21,6 +21,8 @@ import Image from "next/image";
 import deleteLogo from "@/public/delete-left-solid.svg";
 import plusLogo from "../../public/plus-solid.svg";
 
+import useToggleStore from "@/app/zustand/toggle";
+
 /*=========================================================================================*/
 // component section
 /*=========================================================================================*/
@@ -30,16 +32,17 @@ export default function AddTask_panel() {
     (state) => state.toggle_addTask.toggle_addTask
   );
   //
-
+  const addTask_tg = useToggleStore((state) => state.addTask_tg);
+  const addTask_tg_r = useToggleStore((state) => state.addTask_tg_r);
   let dispatch = useDispatch();
   useEffect(() => {}, [toggle_addTask]);
   return (
     <>
-      {toggle_addTask && (
+      {addTask_tg && (
         <div id="AddTask_panel">
           <div
             onClick={() => {
-              dispatch(toggle_addTask_f(false));
+              addTask_tg_r(false);
             }}
             id="AddTask_panel-transparent_background"
           ></div>
@@ -218,6 +221,8 @@ let CREATE_TASK_BTN = ({ subtasks_data }) => {
   let task_info = useSelector((state) => state.add_boards.newTask);
   // let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
   // let idOf = useSelector((state) => state.add_boards.selected_board_id);
+  const addTask_tg = useToggleStore((state) => state.addTask_tg);
+  const addTask_tg_r = useToggleStore((state) => state.addTask_tg_r);
   return (
     <>
       <button
@@ -237,7 +242,7 @@ let CREATE_TASK_BTN = ({ subtasks_data }) => {
             console.log(somethig);
             dispatch(edit_tasks_index(0));
             console.log(somethig);
-            dispatch(toggle_addTask_f(false));
+            addTask_tg_r(false);
           }
         }}
       >
