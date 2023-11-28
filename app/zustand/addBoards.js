@@ -15,8 +15,10 @@ const addBoardsStore = create((set) => ({
     taskName: "",
     description: "",
     subtasks: [],
-    index: 0,
+    ColumnIndex: 0,
   },
+  selected_task_column: 0,
+  selected_task: 0,
   // ===============
   //  ! reducers
   // ===============
@@ -85,13 +87,13 @@ const addBoardsStore = create((set) => ({
     set((state) => ({
       newTask: {
         ...state.newTask,
-        index: st,
+        ColumnIndex: st,
       },
     })),
   add_newTask_r: () =>
     set((state) => {
       let boardIndex = +state.selected_board;
-      let taskIndex = +state.newTask.index;
+      let taskIndex = +state.newTask.ColumnIndex;
       let board = state.arrOfBoards[boardIndex];
       let column = board?.columns[taskIndex];
 
@@ -114,7 +116,7 @@ const addBoardsStore = create((set) => ({
             taskName: "",
             description: "",
             subtasks: [],
-            index: 0,
+            ColumnIndex: 0,
           },
         };
       } else {
@@ -133,6 +135,12 @@ const addBoardsStore = create((set) => ({
         arrOfBoards: updated_arrOfBoards,
       };
     }),
+  // todo ===================================================================================
+  // todo : selected task reducers
+  // todo ==============================================================================
+  selected_task_r: (st) => set((state) => ({ selected_task: st })),
+  selected_task_column_r: (st) =>
+    set((state) => ({ selected_task_column: st })),
 }));
 
 export default addBoardsStore;

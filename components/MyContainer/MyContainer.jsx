@@ -8,6 +8,7 @@ import {
   CreateBoard,
   AddTask_panel,
   DeletePanel_alert,
+  SelectedTask_panel,
 } from "..";
 
 export default function MyContainer() {
@@ -18,6 +19,7 @@ export default function MyContainer() {
         <CreateBoard />
         <AddTask_panel />
         <DeletePanel_alert />
+        <SelectedTask_panel />
         <main className="flex">
           <Menubar />
           <Main />

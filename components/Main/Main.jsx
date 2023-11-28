@@ -1,6 +1,5 @@
 "use client";
 // !redux
-import { useDispatch, useSelector } from "react-redux";
 // hooks
 import { useEffect, useState } from "react";
 // style
@@ -8,17 +7,19 @@ import "./main.css";
 
 //
 import addBoardsStore from "@/app/zustand/addBoards";
+import useToggleStore from "@/app/zustand/toggle";
 //
 
 export default function Main() {
-  let toggle_addTask = useSelector(
-    (state) => state.toggle_addTask.toggle_addTask
-  );
   const selected_board = addBoardsStore((state) => state.selected_board);
   const arrOfBoards = addBoardsStore((state) => state.arrOfBoards);
-
+  const taskPanel_tg_r = useToggleStore((state) => state.taskPanel_tg_r);
+  const selected_task_r = addBoardsStore((state) => state.selected_task_r);
+  const selected_task_column_r = addBoardsStore(
+    (state) => state.selected_task_column_r
+  );
   // let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
-  useEffect(() => {}, [toggle_addTask, arrOfBoards]);
+  useEffect(() => {}, [arrOfBoards]);
   return (
     <>
       <div className="border-2 px-[1rem] border-yellow-400 w-full  flex space-x-[1rem] overflow-auto">
@@ -33,7 +34,13 @@ export default function Main() {
                   return (
                     <li
                       onClick={() => {
+                        console.log(`the element is :`);
                         console.log(e);
+                        console.log(`the index is : ${i}`);
+                        //
+                        selected_task_column_r(e.ColumnIndex);
+                        taskPanel_tg_r(true);
+                        selected_task_r(i);
                       }}
                       key={i}
                       className="flex flex-col my-[1rem] justify-around px-[1rem] h-[6rem] bg-d_component rounded-xl"
