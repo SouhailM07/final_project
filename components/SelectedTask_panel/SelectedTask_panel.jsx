@@ -1,6 +1,7 @@
 "use client";
 // style
 import "./selectedtask_panel.css";
+import { useEffect } from "react";
 // assets
 import Image from "next/image";
 import editLogo from "@/public/ellipsis-vertical-solid.svg";
@@ -11,6 +12,10 @@ import addBoardsStore from "@/app/zustand/addBoards";
 export default function SelectedTask_panel() {
   const taskPanel_tg = useToggleStore((state) => state.taskPanel_tg);
   const taskPanel_tg_r = useToggleStore((state) => state.taskPanel_tg_r);
+  const task_settings_tg = useToggleStore((state) => state.task_settings_tg);
+  const task_settings_tg_r = useToggleStore(
+    (state) => state.task_settings_tg_r
+  );
   //
   const arrOfBoards = addBoardsStore((state) => state.arrOfBoards);
   const selected_task = addBoardsStore((state) => state.selected_task);
@@ -21,11 +26,16 @@ export default function SelectedTask_panel() {
     arrOfBoards[+selected_task]?.columns[+selected_task_column].tasks[
       selected_task
     ];
-  console.log(selected_task_details);
+  useEffect(() => {
+    console.log(selected_task_details);
+    console.log(arrOfBoards[selected_task]);
+    console.log(selected_task);
+    console.log(selected_task_column);
+  }, [selected_task]);
   return (
     <>
       {taskPanel_tg && (
-        <div className="Panel">
+        <div className="Panel z-[7]">
           <div
             onClick={() => taskPanel_tg_r(false)}
             className="Panel-transparentBackground"
@@ -33,20 +43,25 @@ export default function SelectedTask_panel() {
           <div className="Panel-container w-[40rem] min-h-[22rem] px-[2rem] rounded-xl flex flex-col justify-between py-[2rem]">
             <div className="flex justify-between">
               <h2 className="text-[1.8rem] font-bold">
-                {selected_task_details.taskName}
+                {selected_task_details?.taskName}
               </h2>
-              <button>
+              <button
+                onClick={() => {
+                  task_settings_tg_r();
+                }}
+              >
                 <Image src={editLogo} alt="" className="h-[2.5rem] w-[3rem]" />
+                {task_settings_tg && <TaskSettings_panel />}
               </button>
             </div>
-            <p className="my-[1rem]">{selected_task_details.description}</p>
+            <p className="my-[1rem]">{selected_task_details?.description}</p>
             <ul className="w-full">
               <div>
                 Subtasks (<span>0</span>
                 <span> of </span>
-                <span>{selected_task_details.subtasks.length}</span>)
+                <span>{selected_task_details?.subtasks.length}</span>)
               </div>
-              {selected_task_details.subtasks.map((e, i) => {
+              {selected_task_details?.subtasks.map((e, i) => {
                 return (
                   <li
                     key={i}
@@ -87,3 +102,25 @@ export default function SelectedTask_panel() {
     </>
   );
 }
+
+let TaskSettings_panel = () => {
+  const deleteTask_panel_tg_r = useToggleStore(
+    (state) => state.deleteTask_panel_tg_r
+  );
+  const taskPanel_tg_r = useToggleStore((state) => state.taskPanel_tg_r);
+  return (
+    <>
+      <div className=" translate-y-[1rem] translate-x-[-6rem] absolute flex flex-col bg-d_body h-[5rem] w-[10rem] justify-between py-[0.6rem] rounded-xl">
+        <button>Edit Task</button>
+        <button
+          onClick={() => {
+            deleteTask_panel_tg_r(true);
+          }}
+          className="text-red-500"
+        >
+          Delete Task
+        </button>
+      </div>
+    </>
+  );
+};
