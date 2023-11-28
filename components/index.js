@@ -7,3 +7,4 @@ export { default as CreateBoard } from "./CreateBoard/CreateBoard";
 export { default as SelectedTask_panel } from "./SelectedTask_panel/SelectedTask_panel";
 export { default as BoardSetting_panel } from "./BoardSetting_panel/BoardSetting_panel";
 export { default as DeletePanel_alert } from "./DeletePanel_alert/DeletePanel_alert";
+export { default as DeleteTask_panel } from "./DeleteTask_panel/DeleteTask_panel";
