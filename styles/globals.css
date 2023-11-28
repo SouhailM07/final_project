@@ -79,5 +79,5 @@ html {
 }
 
 .Panel-container {
-  @apply bg-d_component;
+  @apply bg-d_component z-[1];
 }

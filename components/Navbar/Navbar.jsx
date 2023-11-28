@@ -45,7 +45,7 @@ export default function Navbar() {
           </button>
           <button>
             <Image
-              onClick={() => board_settings_tg_r(true)}
+              onClick={() => board_settings_tg_r()}
               src={editLogo}
               alt=""
               className="h-[2.5rem] w-[3rem]"

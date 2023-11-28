@@ -1,7 +1,14 @@
 // hooks
 import "./mycontainer.css";
 // components
-import { Navbar, Menubar, Main, CreateBoard, AddTask_panel } from "..";
+import {
+  Navbar,
+  Menubar,
+  Main,
+  CreateBoard,
+  AddTask_panel,
+  DeletePanel_alert,
+} from "..";
 
 export default function MyContainer() {
   return (
@@ -10,6 +17,7 @@ export default function MyContainer() {
         <Navbar />
         <CreateBoard />
         <AddTask_panel />
+        <DeletePanel_alert />
         <main className="flex">
           <Menubar />
           <Main />
