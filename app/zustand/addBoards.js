@@ -20,9 +20,9 @@ const addBoardsStore = create((set) => ({
   // ===============
   //  ! reducers
   // ===============
-  // ===================================================================================
+  // todo ===================================================================================
   // todo : adding new board reducers
-  // ===================================================================================
+  // todo ==============================================================================
   edit_newBoard_name_r: (st) =>
     set((state) => ({
       newBoard: {
@@ -120,6 +120,18 @@ const addBoardsStore = create((set) => ({
       } else {
         return state;
       }
+    }),
+  // todo ===================================================================================
+  // todo : deleting reducers
+  // todo ==============================================================================
+  delete_board_r: () =>
+    set((state) => {
+      const updated_arrOfBoards = state.arrOfBoards.filter((e, i) => {
+        return i != +state.selected_board;
+      });
+      return {
+        arrOfBoards: updated_arrOfBoards,
+      };
     }),
 }));
 
