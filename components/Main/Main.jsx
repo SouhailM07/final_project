@@ -6,17 +6,23 @@ import { useEffect, useState } from "react";
 // style
 import "./main.css";
 
+//
+import addBoardsStore from "@/app/zustand/addBoards";
+//
+
 export default function Main() {
-  let selected_board = useSelector((state) => state.add_boards.selected_board);
   let toggle_addTask = useSelector(
     (state) => state.toggle_addTask.toggle_addTask
   );
-  let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
+  const selected_board = addBoardsStore((state) => state.selected_board);
+  const arrOfBoards = addBoardsStore((state) => state.arrOfBoards);
+
+  // let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
   useEffect(() => {}, [toggle_addTask, arrOfBoards]);
   return (
     <>
       <div className="border-2 px-[1rem] border-yellow-400 w-full  flex space-x-[1rem] overflow-auto">
-        {selected_board.columns?.map((e, i) => {
+        {arrOfBoards[selected_board]?.columns?.map((e, i) => {
           return (
             <div key={i} className="border-2 px-[1rem] w-[20rem] text-white">
               <h3 className="my-[1rem]">

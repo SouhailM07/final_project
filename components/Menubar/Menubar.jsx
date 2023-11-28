@@ -1,12 +1,12 @@
 "use client";
 // ! redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { select_the_board } from "@/app/redux/reducers/add_boards";
 // style
 import "./menubar.css";
 import { motion } from "framer-motion";
 // hooks
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import axios from "axios";
 // assets
 import Image from "next/image";
@@ -24,17 +24,17 @@ import addBoardsStore from "@/app/zustand/addBoards";
 
 export default function Menubar() {
   let [showMenuBar, setShowMenuBar] = useState(false);
-  let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
-  useEffect(() => {}, [arrOfBoards]);
 
   //
   const createBoard_tg_r = useToggleStore((state) => state.createBoard_tg_r);
+  const arrOfBoards = addBoardsStore((state) => state.arrOfBoards);
+  //
   return (
     <>
       <motion.aside animate={{ x: showMenuBar ? "-20rem" : 0 }}>
         <div id="Menubar-s1">
           <div className="pl-[1rem]">
-            ALL BOARDS <span>(2)</span>
+            ALL BOARDS <span>({arrOfBoards.length})</span>
           </div>
           <Boards />
           <button
@@ -83,9 +83,9 @@ let ToggleMode = () => {
 
 let Boards = () => {
   let dispatch = useDispatch();
-  let selected_board = useSelector((state) => state.add_boards.selected_board);
   //
   const arrOfBoards = addBoardsStore((state) => state.arrOfBoards);
+  const select_the_board = addBoardsStore((state) => state.select_the_board);
   //
   useLayoutEffect(() => {
     let boardsLabel = document.querySelectorAll(
@@ -112,8 +112,10 @@ let Boards = () => {
 
               <label
                 htmlFor={e.id}
+                // ! you were looking for this
                 onClick={() => {
-                  dispatch(select_the_board(e));
+                  // dispatch(select_the_board(e));
+                  select_the_board(i);
                   console.log("check this selected board");
                   console.log(e);
                 }}
