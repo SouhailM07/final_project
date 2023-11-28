@@ -17,6 +17,7 @@ import hideLogo from "../../public/eye-slash-regular.svg";
 import showLogo from "../../public/eye-regular.svg";
 
 import useToggleStore from "@/app/zustand/toggle";
+import addBoardsStore from "@/app/zustand/addBoards";
 /*=======================================================================================*/
 // component section
 /*=======================================================================================*/
@@ -39,7 +40,6 @@ export default function Menubar() {
           <button
             onClick={() => {
               createBoard_tg_r(true);
-              // dispatch(toggle_createBoard_f(true));
             }}
             className="border-2 border-red-500 py-[1rem] hover:bg-white"
           >
@@ -82,24 +82,18 @@ let ToggleMode = () => {
 /*=======================================================================================*/
 
 let Boards = () => {
-  // let arrOfBoard = ["platform", "marketing plan", "roadmap"];
   let dispatch = useDispatch();
-  let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
   let selected_board = useSelector((state) => state.add_boards.selected_board);
-  let toggle_addTask = useSelector(
-    (state) => state.toggle_addTask.toggle_addTask
-  );
+  //
+  const arrOfBoards = addBoardsStore((state) => state.arrOfBoards);
+  //
   useLayoutEffect(() => {
     let boardsLabel = document.querySelectorAll(
       "aside ul li input[type='radio'] ~ label"
     );
     // boardsLabel[0].click();
     console.log(arrOfBoards);
-    console.log("Menubar updated");
-    console.log("check this arr of boards");
-    console.log(arrOfBoards);
-    console.log("check this selected board");
-    console.log(selected_board);
+    // console.log(selected_board);
     // ! api
     // toggle_createBoard
   }, [arrOfBoards]);

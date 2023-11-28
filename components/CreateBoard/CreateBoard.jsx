@@ -1,16 +1,4 @@
 "use client";
-// ! redux
-import { useDispatch, useSelector } from "react-redux";
-import {
-  toggle_createBoard_f,
-  adding_boardName,
-} from "@/app/redux/reducers/createBoard";
-import {
-  add_board_reducer,
-  edit_newBoard_columns,
-  edit_newBoard_id,
-  edit_newBoard_name,
-} from "@/app/redux/reducers/add_boards";
 // style
 import "./createboard.css";
 // hooks
@@ -21,9 +9,10 @@ import Image from "next/image";
 import plusLogo from "@/public/plus-solid.svg";
 import deleteLogo from "@/public/delete-left-solid.svg";
 
-//!=====================[zustand start]=====================================================
+// !=====================[zustand start]=====================================================
 import useToggleStore from "@/app/zustand/toggle";
-//!=====================[zustand end]=====================================================
+import addBoardsStore from "@/app/zustand/addBoards";
+// !=====================[zustand end]=====================================================
 
 /*=========================================================================================*/
 // component section
@@ -60,15 +49,18 @@ export default function CreateBoard() {
 /*=========================================================================================*/
 
 let BoardName = () => {
-  let dispatch = useDispatch();
+  const newBoard = addBoardsStore((state) => state.newBoard);
+  const edit_newBoard_name_r = addBoardsStore(
+    (state) => state.edit_newBoard_name_r
+  );
   return (
     <>
       <div id="BoardName">
         <label htmlFor="boardName">Board Name</label>
         <input
           onChange={(e) => {
-            // dispatch(adding_boardName(e.target.value))
-            dispatch(edit_newBoard_name(e.target.value));
+            console.log(newBoard);
+            edit_newBoard_name_r(e.target.value);
           }}
           type="text"
           id="boardName"
@@ -95,17 +87,21 @@ let ADD_NEW_COLUMN_BTN = ({ fnc }) => {
 };
 
 let CREATE_NEW_BOARD_BTN = ({ newBoard_state }) => {
-  let edited_newBoard = useSelector((state) => state.add_boards.newBoard);
   let randomId = useId();
-  // changing the randomId when create new column btn is clicked
-  let toggle_createBoard = useSelector(
-    (state) => state.toggle_createBoard.toggle_createBoard
+  //
+  const newBoard = addBoardsStore((state) => state.newBoard);
+  const add_newBoard = addBoardsStore((state) => state.add_newBoard);
+  const edit_newBoard_columns_r = addBoardsStore(
+    (state) => state.edit_newBoard_columns_r
   );
+  const edit_newBoard_id_r = addBoardsStore(
+    (state) => state.edit_newBoard_id_r
+  );
+  // changing the randomId when create new column btn is clicked
+  const createBoard_tg_r = useToggleStore((state) => state.createBoard_tg_r);
   useEffect(() => {
     console.log("random Id changed");
-  }, [toggle_createBoard]);
-  const createBoard_tg_r = useToggleStore((state) => state.createBoard_tg_r);
-  let dispatch = useDispatch();
+  }, [createBoard_tg_r]);
   return (
     <>
       <button
@@ -113,13 +109,12 @@ let CREATE_NEW_BOARD_BTN = ({ newBoard_state }) => {
         onClick={async () => {
           // create_new_board_axios();
           // ! activate after completing redux add_boards
-          if (edited_newBoard.name.length > 0) {
-            await dispatch(edit_newBoard_id(randomId));
-            await dispatch(edit_newBoard_columns(newBoard_state));
-            await dispatch(add_board_reducer());
+          if (newBoard.name.length > 0) {
+            edit_newBoard_id_r(randomId);
+            edit_newBoard_columns_r(newBoard_state);
+            add_newBoard();
             createBoard_tg_r(false);
-            console.log(newBoard_state);
-            console.log(edited_newBoard);
+            console.log(newBoard);
           }
         }}
       >
