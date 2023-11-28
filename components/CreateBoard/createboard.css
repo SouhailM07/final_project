@@ -2,21 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-#CreateBoard {
-  @apply fixed top-0 flex justify-center items-center;
-  @apply h-full w-full z-[10];
-  @apply bg-[#0000008a] text-white;
-}
-
-#CreateBoard-transparentBackground {
-  @apply absolute;
-  @apply h-full w-full z-[1];
-}
-
 #CreateBoard-container {
   @apply relative rounded-xl flex flex-col justify-between;
   @apply min-h-[25rem] z-[2] w-[32rem] px-[2rem] py-[2rem];
-  @apply bg-d_component;
 }
 
 #BoardName {

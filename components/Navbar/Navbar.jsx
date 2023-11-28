@@ -1,12 +1,14 @@
 "use client";
-//
+// components
+import { BoardSetting_panel } from "..";
+// style
 import "./navbar.css";
 // assets
 import Image from "next/image";
 import plusLogo from "@/public/plus-solid.svg";
 import editLogo from "@/public/ellipsis-vertical-solid.svg";
 import kanbanLogo from "@/public/bars-solid.svg";
-//
+// ! zustand
 import useToggleStore from "@/app/zustand/toggle";
 import addBoardsStore from "@/app/zustand/addBoards";
 
@@ -14,7 +16,10 @@ export default function Navbar() {
   const addTask_tg_r = useToggleStore((state) => state.addTask_tg_r);
   const arrOfBoards = addBoardsStore((state) => state.arrOfBoards);
   const selected_board = addBoardsStore((state) => state.selected_board);
-  const delete_board_r = addBoardsStore((state) => state.delete_board_r);
+  const board_settings_tg_r = useToggleStore(
+    (state) => state.board_settings_tg_r
+  );
+  const board_settings_tg = useToggleStore((state) => state.board_settings_tg);
   // redux state to toggle add task panel
   return (
     <>
@@ -39,18 +44,13 @@ export default function Navbar() {
             <span>Add New Task</span>
           </button>
           <button>
-            <Image src={editLogo} alt="" className="h-[2.5rem] w-[3rem]" />
-            <div className=" absolute flex flex-col items-start px-[1rem] space-y-3 w-[10rem] h-[5rem] translate-x-[-10rem] translate-y-[1rem] bg-d_component rounded-xl">
-              <div>Edit board</div>
-              <div
-                onClick={() => {
-                  delete_board_r();
-                }}
-                className="text-red-500"
-              >
-                Delete board
-              </div>
-            </div>
+            <Image
+              onClick={() => board_settings_tg_r(true)}
+              src={editLogo}
+              alt=""
+              className="h-[2.5rem] w-[3rem]"
+            />
+            {board_settings_tg && <BoardSetting_panel />}
           </button>
         </div>
       </nav>

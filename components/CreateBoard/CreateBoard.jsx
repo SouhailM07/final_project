@@ -26,14 +26,15 @@ export default function CreateBoard() {
   return (
     <>
       {createBoard_tg && (
-        <div id="CreateBoard">
+        <div id="CreateBoard" className="Panel">
           <div
             onClick={() => {
               createBoard_tg_r(false);
             }}
             id="CreateBoard-transparentBackground"
+            className="Panel-transparentBackground"
           ></div>
-          <div id="CreateBoard-container">
+          <div id="CreateBoard-container" className="Panel-container">
             <h3>Add New Board</h3>
             <BoardName />
             <BoardColumns />

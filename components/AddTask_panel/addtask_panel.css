@@ -2,21 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-#AddTask_panel-transparent_background {
-  @apply absolute;
-  @apply h-full w-full z-[0];
-}
-
-#AddTask_panel {
-  @apply grid place-items-center absolute top-0 overflow-y-auto overflow-x-hidden;
-  @apply h-full w-full z-[10];
-  @apply bg-[#0000008a] text-white;
-}
-
 #AddTask_panel-container {
   @apply flex flex-col rounded-xl relative justify-between font-bold;
   @apply w-[35rem]  min-h-[45rem] px-[2rem] z-[1] py-[1rem];
-  @apply bg-d_component;
 }
 
 #TaskTitle input {

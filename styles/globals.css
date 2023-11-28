@@ -64,3 +64,20 @@ html {
     height: 0%;
   }
 }
+
+/* global css classes */
+
+.Panel {
+  @apply fixed top-0 flex justify-center items-center;
+  @apply h-full w-full z-[10];
+  @apply bg-[#0000008a] text-white;
+}
+
+.Panel-transparentBackground {
+  @apply absolute;
+  @apply h-full w-full z-[1];
+}
+
+.Panel-container {
+  @apply bg-d_component;
+}

@@ -21,14 +21,15 @@ export default function AddTask_panel() {
   return (
     <>
       {addTask_tg && (
-        <div id="AddTask_panel">
+        <div id="AddTask_panel" className="Panel">
           <div
             onClick={() => {
               addTask_tg_r(false);
             }}
             id="AddTask_panel-transparent_background"
+            className="Panel-transparentBackground"
           ></div>
-          <div id="AddTask_panel-container">
+          <div id="AddTask_panel-container" className="Panel-container">
             <h2 className="text-[1.6rem] italic">Add New Task</h2>
             <TaskTitle />
             <TaskDescription />
