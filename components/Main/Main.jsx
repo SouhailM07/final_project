@@ -47,7 +47,13 @@ export default function Main() {
                     >
                       <h2 className="text-[1.5rem] ">{e.taskName}</h2>
                       <div className="space-x-1 ">
-                        <span>0</span>
+                        <span>
+                          {
+                            e?.subtasks.filter((e, i) => {
+                              return e.state == true;
+                            }).length
+                          }
+                        </span>
                         <span>of</span>
                         <span>{e.subtasks.length}</span>
                       </div>

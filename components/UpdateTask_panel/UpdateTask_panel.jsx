@@ -131,7 +131,7 @@ let Subtasks = ({ taskName_state, taskDescription_state }) => {
   };
   return (
     <>
-      <div id="Subtasks">
+      <div className="Subtasks">
         <h3>Subtasks</h3>
         <ul>
           {taskSubtasks.map((e, i) => {
@@ -197,11 +197,11 @@ let StatusTask = () => {
   let selected_task_details_columns = arrOfBoards[+selected_board]?.columns;
   return (
     <>
-      <div id="StatusTask">
+      <div className="StatusTask">
         <h3>STATUS</h3>
         <select
           onChange={(e) => {
-            // edit_newTask_index_r(e.target.value);
+            // edit_newTask_index_r(e.tarzget.value);
           }}
         >
           {selected_task_details_columns.map((e, i) => {

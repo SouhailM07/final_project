@@ -22,6 +22,7 @@ let addBoardsStore = create(
     },
     selected_task_column: "",
     selected_task: "",
+    selected_subtask: "",
     // ===============
     //  ! reducers
     // ===============
@@ -222,6 +223,9 @@ let addBoardsStore = create(
           arrOfBoards: updated_arrOfBoards,
         };
       }),
+    // todo ===================================================================================
+    // todo : updating  task reducers
+    // todo ==============================================================================
     updateTask_name_r: (st) =>
       set((state) => {
         const updated_arrOfBoards = state.arrOfBoards.map(
@@ -310,47 +314,108 @@ let addBoardsStore = create(
           arrOfBoards: updated_arrOfBoards,
         };
       }),
-      updateTask_subtasks_r: (st) =>
-  set((state) => {
-    const updated_arrOfBoards = state.arrOfBoards.map((board, boardIndex) => {
-      if (boardIndex === state.selected_board) {
-        const updatedColumns = board.columns.map((column, columnIndex) => {
-          if (columnIndex === state.selected_task_column) {
-            const updatedTasks = column.tasks.map((task, taskIndex) => {
-              if (taskIndex === state.selected_task) {
-                return {
-                  ...task,
-                  subtasks: st,
-                };
-              } else {
-                return task;
-              }
-            });
+    updateTask_subtasks_r: (st) =>
+      set((state) => {
+        const updated_arrOfBoards = state.arrOfBoards.map(
+          (board, boardIndex) => {
+            if (boardIndex === state.selected_board) {
+              const updatedColumns = board.columns.map(
+                (column, columnIndex) => {
+                  if (columnIndex === state.selected_task_column) {
+                    const updatedTasks = column.tasks.map((task, taskIndex) => {
+                      if (taskIndex === state.selected_task) {
+                        return {
+                          ...task,
+                          subtasks: st,
+                        };
+                      } else {
+                        return task;
+                      }
+                    });
 
-            return {
-              ...column,
-              tasks: updatedTasks,
-            };
-          } else {
-            return column;
+                    return {
+                      ...column,
+                      tasks: updatedTasks,
+                    };
+                  } else {
+                    return column;
+                  }
+                }
+              );
+
+              return {
+                ...board,
+                columns: updatedColumns,
+              };
+            } else {
+              return board;
+            }
           }
-        });
+        );
 
         return {
-          ...board,
-          columns: updatedColumns,
+          ...state,
+          arrOfBoards: updated_arrOfBoards,
         };
-      } else {
-        return board;
-      }
-    });
+      }),
+    updateTask_subtask_r: (st) =>
+      set((state) => {
+        const updated_arrOfBoards = state.arrOfBoards.map(
+          (board, boardIndex) => {
+            if (boardIndex === state.selected_board) {
+              const updatedColumns = board.columns.map(
+                (column, columnIndex) => {
+                  if (columnIndex === state.selected_task_column) {
+                    const updatedTasks = column.tasks.map((task, taskIndex) => {
+                      if (taskIndex === state.selected_task) {
+                        const updatedSubtasks = task.subtasks.map(
+                          (subtask, subtaskIndex) => {
+                            if (subtaskIndex === st) {
+                              return {
+                                ...subtask,
+                                // Replace 'state' with the actual property you want to update.
+                                state: !subtask.state,
+                              };
+                            } else {
+                              return subtask;
+                            }
+                          }
+                        );
 
-    return {
-      ...state,
-      arrOfBoards: updated_arrOfBoards,
-    };
-  }),
+                        return {
+                          ...task,
+                          subtasks: updatedSubtasks,
+                        };
+                      } else {
+                        return task;
+                      }
+                    });
 
+                    return {
+                      ...column,
+                      tasks: updatedTasks,
+                    };
+                  } else {
+                    return column;
+                  }
+                }
+              );
+
+              return {
+                ...board,
+                columns: updatedColumns,
+              };
+            } else {
+              return board;
+            }
+          }
+        );
+
+        return {
+          ...state,
+          arrOfBoards: updated_arrOfBoards,
+        };
+      }),
   })
   // { name: "addBoardsStore" }
   // )

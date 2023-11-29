@@ -1,7 +1,7 @@
 "use client";
 // style
 import "./selectedtask_panel.css";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 // assets
 import Image from "next/image";
 import editLogo from "@/public/ellipsis-vertical-solid.svg";
@@ -27,6 +27,9 @@ export default function SelectedTask_panel() {
     arrOfBoards[+selected_board]?.columns[+selected_task_column]?.tasks[
       selected_task
     ];
+  let updateTask_subtask_r = addBoardsStore(
+    (state) => state.updateTask_subtask_r
+  );
   useEffect(() => {
     console.log(selected_task_details);
   }, [taskPanel_tg, arrOfBoards]);
@@ -54,7 +57,14 @@ export default function SelectedTask_panel() {
           <p className="my-[1rem]">{selected_task_details?.description}</p>
           <ul className="w-full">
             <div>
-              Subtasks (<span>0</span>
+              Subtasks (
+              <span>
+                {
+                  selected_task_details?.subtasks.filter((e, i) => {
+                    return e.state == true;
+                  }).length
+                }
+              </span>
               <span> of </span>
               <span>{selected_task_details?.subtasks.length}</span>)
             </div>
@@ -62,17 +72,27 @@ export default function SelectedTask_panel() {
               return (
                 <li
                   key={i}
+                  // ! function to update the state
+                  onClick={() => {
+                    updateTask_subtask_r(i);
+                  }}
                   className="bg-d_body h-[4rem] items-center my-[1rem] rounded-lg flex"
                 >
-                  <input type="checkbox" name="" id={i} className="mx-[1rem]" />
-                  <label htmlFor={i} className="text-[1.2rem]  block w-full ">
+                  <input
+                    type="checkbox"
+                    name=""
+                    id={i}
+                    checked={e.state == true}
+                    className="mx-[1rem] "
+                  />
+                  <label htmlFor={i} className="text-[1.2rem]">
                     {e.subtask}
                   </label>
                 </li>
               );
             })}
           </ul>
-          <div>
+          <div className="StatusTask">
             <h3>Current Status</h3>
             <select
               onChange={(e) => {

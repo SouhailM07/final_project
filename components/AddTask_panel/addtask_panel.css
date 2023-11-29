@@ -25,25 +25,6 @@
   @apply bg-transparent;
 }
 
-#Subtasks ul {
-  @apply w-full mb-[1rem];
-}
-
-#StatusTask select {
-  @apply border-2 focus:outline-none focus:border-act  border-gray-500 rounded-xl;
-  @apply my-[0.8rem] pl-[1rem] py-[0.6rem] mt-[8px] w-full;
-  @apply bg-transparent;
-}
-
-#Subtasks ul li {
-  @apply flex items-center justify-between;
-}
-
-#Subtasks ul li input {
-  @apply focus:outline-none focus:border-act border-2 border-gray-500 rounded-xl;
-  @apply pl-[1rem] my-[0.5rem] w-[90%] py-[0.6rem];
-  @apply bg-transparent;
-}
 
 #ADD_NEW_SUBTASK_BTN {
   @apply rounded-full flex items-center justify-center font-bold;

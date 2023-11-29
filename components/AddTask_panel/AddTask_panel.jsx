@@ -126,7 +126,7 @@ let Subtasks = () => {
   };
   return (
     <>
-      <div id="Subtasks">
+      <div className="Subtasks">
         <h3>Subtasks</h3>
         <ul>
           {subtasks.map((e, i) => {
