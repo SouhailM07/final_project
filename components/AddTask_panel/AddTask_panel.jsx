@@ -138,7 +138,7 @@ let Subtasks = () => {
                   }}
                   type="text"
                   placeholder={e?.placeholder}
-                  value={e[`subTask`]}
+                  value={e[`subtask`]}
                 />
                 <Image
                   src={deleteLogo}

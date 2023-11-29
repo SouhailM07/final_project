@@ -79,5 +79,23 @@ html {
 }
 
 .Panel-container {
+  @apply relative rounded-xl flex flex-col justify-between;
+  @apply min-h-[25rem]  w-[32rem] px-[2rem] py-[2rem];
   @apply bg-d_component z-[1];
+}
+
+.Panel-title {
+  @apply text-[1.6rem] font-bold;
+}
+
+.Panel-description {
+  @apply focus:outline-none focus:border-act  border-2 border-gray-500 rounded-xl;
+  @apply pl-[1rem] py-[0.7rem] mt-[8px] w-full;
+  @apply bg-transparent;
+}
+
+.Panel-endBtn {
+  @apply rounded-full flex  justify-center  font-bold;
+  @apply py-[0.6rem] space-x-[1rem] text-[1.1rem] w-full;
+  @apply bg-act text-white;
 }

@@ -9,6 +9,7 @@ const useToggleStore = create((set) => ({
   delete_panel_alert_tg: false,
   deleteTask_panel_tg: false,
   updateBoard_panel_tg: false,
+  updateTask_panel_tg: false,
   createBoard_tg_r: (st) => set((state) => ({ createBoard_tg: st })),
   addTask_tg_r: (st) => set((state) => ({ addTask_tg: st })),
   taskPanel_tg_r: (st) => set((state) => ({ taskPanel_tg: st })),
@@ -21,6 +22,7 @@ const useToggleStore = create((set) => ({
     set((state) => ({ task_settings_tg: !state.task_settings_tg })),
   updateBoard_panel_tg_r: (st) =>
     set((state) => ({ updateBoard_panel_tg: st })),
+  updateTask_panel_tg_r: (st) => set((state) => ({ updateTask_panel_tg: st })),
 }));
 
 export default useToggleStore;

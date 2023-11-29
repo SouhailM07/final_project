@@ -99,10 +99,19 @@ let TaskSettings_panel = () => {
     (state) => state.deleteTask_panel_tg_r
   );
   const taskPanel_tg_r = useToggleStore((state) => state.taskPanel_tg_r);
+  const updateTask_panel_tg_r = useToggleStore(
+    (state) => state.updateTask_panel_tg_r
+  );
   return (
     <>
       <div className=" translate-y-[1rem] translate-x-[-6rem] absolute flex flex-col bg-d_body h-[5rem] w-[10rem] justify-between py-[0.6rem] rounded-xl">
-        <button>Edit Task</button>
+        <button
+          onClick={() => {
+            updateTask_panel_tg_r(true);
+          }}
+        >
+          Edit Task
+        </button>
         <button
           onClick={() => {
             deleteTask_panel_tg_r(true);

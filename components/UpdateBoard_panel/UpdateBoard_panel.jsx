@@ -31,7 +31,7 @@ export default function UpdateBoard_panel() {
           className="Panel-transparentBackground"
         ></div>
         <div className="Panel-container flex flex-col min-h-[24rem] w-[30rem] rounded-xl justify-between px-[1rem] py-[2rem]">
-          <h2 className="text-[1.6rem] font-bold">Edit Board</h2>
+          <h2 className="Panel-title">Edit Board</h2>
           {/*  */}
           <div className="flex flex-col my-[1rem]">
             <label htmlFor="">Board Name</label>
@@ -56,7 +56,7 @@ export default function UpdateBoard_panel() {
 let BoardColumns = ({ boardName_state }) => {
   const arrOfBoards = addBoardsStore((state) => state.arrOfBoards);
   const selected_board = addBoardsStore((state) => state.selected_board);
-  let selected_board_info = arrOfBoards[selected_board];
+  // let selected_board_info = arrOfBoards[selected_board];
   let [boardCols, setBoardCols] = useState(
     arrOfBoards[selected_board]?.columns
   );
@@ -101,6 +101,9 @@ let BoardColumns = ({ boardName_state }) => {
   const updateBoard_columns_r = addBoardsStore(
     (state) => state.updateBoard_columns_r
   );
+  const updateBoard_panel_tg_r = useToggleStore(
+    (state) => state.updateBoard_panel_tg_r
+  );
   return (
     <>
       <ul className="my-[1rem]">
@@ -133,6 +136,7 @@ let BoardColumns = ({ boardName_state }) => {
         onClick={() => {
           updateBoard_name_r(boardName_state);
           updateBoard_columns_r(boardCols);
+          updateBoard_panel_tg_r(false);
           console.log(arrOfBoards);
         }}
         className="CREATE_NEW_BOARD_BTN"

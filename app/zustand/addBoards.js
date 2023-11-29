@@ -222,6 +222,135 @@ let addBoardsStore = create(
           arrOfBoards: updated_arrOfBoards,
         };
       }),
+    updateTask_name_r: (st) =>
+      set((state) => {
+        const updated_arrOfBoards = state.arrOfBoards.map(
+          (board, boardIndex) => {
+            if (boardIndex === state.selected_board) {
+              const updatedColumns = board.columns.map(
+                (column, columnIndex) => {
+                  if (columnIndex === state.selected_task_column) {
+                    const updatedTasks = column.tasks.map((task, taskIndex) => {
+                      if (taskIndex === state.selected_task) {
+                        return {
+                          ...task,
+                          taskName: st,
+                        };
+                      } else {
+                        return task;
+                      }
+                    });
+
+                    return {
+                      ...column,
+                      tasks: updatedTasks,
+                    };
+                  } else {
+                    return column;
+                  }
+                }
+              );
+
+              return {
+                ...board,
+                columns: updatedColumns,
+              };
+            } else {
+              return board;
+            }
+          }
+        );
+
+        return {
+          ...state,
+          arrOfBoards: updated_arrOfBoards,
+        };
+      }),
+    updateTask_description_r: (st) =>
+      set((state) => {
+        const updated_arrOfBoards = state.arrOfBoards.map(
+          (board, boardIndex) => {
+            if (boardIndex === state.selected_board) {
+              const updatedColumns = board.columns.map(
+                (column, columnIndex) => {
+                  if (columnIndex === state.selected_task_column) {
+                    const updatedTasks = column.tasks.map((task, taskIndex) => {
+                      if (taskIndex === state.selected_task) {
+                        return {
+                          ...task,
+                          description: st,
+                        };
+                      } else {
+                        return task;
+                      }
+                    });
+
+                    return {
+                      ...column,
+                      tasks: updatedTasks,
+                    };
+                  } else {
+                    return column;
+                  }
+                }
+              );
+
+              return {
+                ...board,
+                columns: updatedColumns,
+              };
+            } else {
+              return board;
+            }
+          }
+        );
+
+        return {
+          ...state,
+          arrOfBoards: updated_arrOfBoards,
+        };
+      }),
+      updateTask_subtasks_r: (st) =>
+  set((state) => {
+    const updated_arrOfBoards = state.arrOfBoards.map((board, boardIndex) => {
+      if (boardIndex === state.selected_board) {
+        const updatedColumns = board.columns.map((column, columnIndex) => {
+          if (columnIndex === state.selected_task_column) {
+            const updatedTasks = column.tasks.map((task, taskIndex) => {
+              if (taskIndex === state.selected_task) {
+                return {
+                  ...task,
+                  subtasks: st,
+                };
+              } else {
+                return task;
+              }
+            });
+
+            return {
+              ...column,
+              tasks: updatedTasks,
+            };
+          } else {
+            return column;
+          }
+        });
+
+        return {
+          ...board,
+          columns: updatedColumns,
+        };
+      } else {
+        return board;
+      }
+    });
+
+    return {
+      ...state,
+      arrOfBoards: updated_arrOfBoards,
+    };
+  }),
+
   })
   // { name: "addBoardsStore" }
   // )
