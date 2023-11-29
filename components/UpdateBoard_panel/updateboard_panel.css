@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.full_input {
+  @apply focus:outline-none focus:border-act  border-2 border-gray-500 rounded-xl;
+  @apply pl-[1rem] py-[0.7rem] mt-[8px] w-full;
+  @apply bg-transparent;
+}
+
+.input_with_img {
+  @apply focus:outline-none focus:border-act border-2 border-gray-500 rounded-xl;
+  @apply pl-[1rem] my-[0.5rem] w-[90%] py-[0.6rem];
+  @apply bg-transparent;
+}

@@ -75,7 +75,7 @@ let BoardName = () => {
 let ADD_NEW_COLUMN_BTN = ({ fnc }) => {
   return (
     <>
-      <button onClick={fnc} id="ADD_NEW_COLUMN_BTN">
+      <button onClick={fnc} className="ADD_NEW_COLUMN_BTN">
         <Image
           src={plusLogo}
           alt=""
@@ -106,7 +106,7 @@ let CREATE_NEW_BOARD_BTN = ({ newBoard_state }) => {
   return (
     <>
       <button
-        id="CREATE_NEW_BOARD_BTN"
+        className="CREATE_NEW_BOARD_BTN"
         onClick={async () => {
           // create_new_board_axios();
           // ! activate after completing redux add_boards

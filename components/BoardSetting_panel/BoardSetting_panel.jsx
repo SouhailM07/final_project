@@ -12,10 +12,20 @@ export default function BoardSetting_panel() {
   const delete_panel_alert_tg_r = useToggleStore(
     (state) => state.delete_panel_alert_tg_r
   );
+  const updateBoard_panel_tg_r = useToggleStore(
+    (state) => state.updateBoard_panel_tg_r
+  );
+
   return (
     <>
       <div className=" absolute flex flex-col items-start px-[1rem] space-y-3 w-[10rem] h-[5rem] translate-x-[-10rem] translate-y-[1rem] bg-d_component rounded-xl">
-        <button>Edit board</button>
+        <button
+          onClick={() => {
+            updateBoard_panel_tg_r(true);
+          }}
+        >
+          Edit board
+        </button>
         <button
           onClick={() => {
             delete_panel_alert_tg_r(true);

@@ -19,13 +19,13 @@
   @apply bg-transparent;
 }
 
-#ADD_NEW_COLUMN_BTN {
+.ADD_NEW_COLUMN_BTN {
   @apply rounded-full flex items-center justify-center font-bold;
   @apply my-[1rem] py-[0.7rem] space-x-[1rem] text-[1.3rem] w-full;
   @apply bg-gray-600 text-act;
 }
 
-#CREATE_NEW_BOARD_BTN {
+.CREATE_NEW_BOARD_BTN {
   @apply rounded-full flex  justify-center  font-bold;
   @apply py-[0.7rem] space-x-[1rem] text-[1.3rem] w-full;
   @apply bg-act text-white;

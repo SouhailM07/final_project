@@ -1,4 +1,6 @@
+"use client";
 // hooks
+
 import "./mycontainer.css";
 // components
 import {
@@ -10,9 +12,19 @@ import {
   DeletePanel_alert,
   SelectedTask_panel,
   DeleteTask_panel,
+  UpdateBoard_panel,
 } from "..";
+//
+import useToggleStore from "@/app/zustand/toggle";
 
 export default function MyContainer() {
+  const updateBoard_panel_tg = useToggleStore(
+    (state) => state.updateBoard_panel_tg
+  );
+  const deleteTask_panel_tg = useToggleStore(
+    (state) => state.deleteTask_panel_tg
+  );
+  const taskPanel_tg = useToggleStore((state) => state.taskPanel_tg);
   return (
     <>
       <div className="h-screen  bg-d_body ">
@@ -21,8 +33,9 @@ export default function MyContainer() {
         <CreateBoard />
         <AddTask_panel />
         <DeletePanel_alert />
-        <DeleteTask_panel />
-        <SelectedTask_panel />
+        {deleteTask_panel_tg && <DeleteTask_panel />}
+        {taskPanel_tg && <SelectedTask_panel />}
+        {updateBoard_panel_tg && <UpdateBoard_panel />}
         <main className="flex">
           <Menubar />
           <Main />
