@@ -18,20 +18,18 @@ export default function SelectedTask_panel() {
   );
   //
   const arrOfBoards = addBoardsStore((state) => state.arrOfBoards);
+  const selected_board = addBoardsStore((state) => state.selected_board);
   const selected_task = addBoardsStore((state) => state.selected_task);
   const selected_task_column = addBoardsStore(
     (state) => state.selected_task_column
   );
   let selected_task_details =
-    arrOfBoards[+selected_task]?.columns[+selected_task_column].tasks[
+    arrOfBoards[+selected_board]?.columns[+selected_task_column].tasks[
       selected_task
     ];
   useEffect(() => {
     console.log(selected_task_details);
-    console.log(arrOfBoards[selected_task]);
-    console.log(selected_task);
-    console.log(selected_task_column);
-  }, [selected_task]);
+  }, [taskPanel_tg, arrOfBoards]);
   return (
     <>
       {taskPanel_tg && (

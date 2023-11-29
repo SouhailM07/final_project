@@ -19,7 +19,7 @@ export default function Main() {
     (state) => state.selected_task_column_r
   );
   // let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
-  useEffect(() => {}, [arrOfBoards]);
+  useEffect(() => {}, [selected_board]);
   return (
     <>
       <div className="border-2 px-[1rem] border-yellow-400 w-full  flex space-x-[1rem] overflow-auto">

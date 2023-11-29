@@ -17,8 +17,8 @@ const addBoardsStore = create((set) => ({
     subtasks: [],
     ColumnIndex: 0,
   },
-  selected_task_column: 0,
-  selected_task: 0,
+  selected_task_column: "",
+  selected_task: "",
   // ===============
   //  ! reducers
   // ===============
