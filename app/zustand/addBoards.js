@@ -1,6 +1,7 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-const addBoardsStore = create((set) => ({
+let addBoardsStore = create((set) => ({
   // ===============
   // states
   // ===============
@@ -135,6 +136,45 @@ const addBoardsStore = create((set) => ({
         arrOfBoards: updated_arrOfBoards,
       };
     }),
+    delete_task_r: () =>
+    set((state) => {
+      const selectedBoardIndex = +state.selected_board;
+      const selectedTaskColumnIndex = +state.selected_task_column;
+      const selectedTaskIndex = +state.selected_task;
+  
+      // Copy the existing state
+      const updatedArrOfBoards = [...state.arrOfBoards];
+  
+      // Get the selected board
+      const selectedBoard = updatedArrOfBoards[selectedBoardIndex];
+  
+      // Get the selected column
+      const selectedColumn = selectedBoard.columns[selectedTaskColumnIndex];
+  
+      // Filter out the selected task from the column's tasks
+      const updatedTasks = selectedColumn.tasks.filter((task, i) => i !== selectedTaskIndex);
+  
+      // Create a new column with the updated tasks
+      const updatedColumn = { ...selectedColumn, tasks: updatedTasks };
+  
+      // Create a new board with the updated column
+      const updatedBoard = {
+        ...selectedBoard,
+        columns: selectedBoard.columns.map((col, index) =>
+          index === selectedTaskColumnIndex ? updatedColumn : col
+        ),
+      };
+  
+      // Update the selected board in the array of boards
+      updatedArrOfBoards[selectedBoardIndex] = updatedBoard;
+  
+      return {
+        arrOfBoards: updatedArrOfBoards,
+        selected_task_column: 0,
+        selected_task: 0,
+      };
+    }),
+  
   // todo ===================================================================================
   // todo : selected task reducers
   // todo ==============================================================================
@@ -142,5 +182,8 @@ const addBoardsStore = create((set) => ({
   selected_task_column_r: (st) =>
     set((state) => ({ selected_task_column: st })),
 }));
+
+// making this store like localStorage
+// addBoardsStore = persist(addBoardsStore);
 
 export default addBoardsStore;

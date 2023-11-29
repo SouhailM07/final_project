@@ -24,7 +24,7 @@ export default function SelectedTask_panel() {
     (state) => state.selected_task_column
   );
   let selected_task_details =
-    arrOfBoards[+selected_board]?.columns[+selected_task_column].tasks[
+    arrOfBoards[+selected_board]?.columns[+selected_task_column]?.tasks[
       selected_task
     ];
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function SelectedTask_panel() {
                 return (
                   <li
                     key={i}
-                    className="bg-d_body py-[1rem]  my-[1rem] rounded-lg flex"
+                    className="bg-d_body h-[4rem] items-center my-[1rem] rounded-lg flex"
                   >
                     <input
                       type="checkbox"
