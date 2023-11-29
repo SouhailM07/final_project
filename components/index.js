@@ -9,3 +9,4 @@ export { default as BoardSetting_panel } from "./BoardSetting_panel/BoardSetting
 export { default as DeletePanel_alert } from "./DeletePanel_alert/DeletePanel_alert";
 export { default as DeleteTask_panel } from "./DeleteTask_panel/DeleteTask_panel";
 export { default as UpdateBoard_panel } from "./UpdateBoard_panel/UpdateBoard_panel";
+export { default as UpdateTask_panel } from "./UpdateTask_panel/UpdateTask_panel";
