@@ -136,27 +136,29 @@ let addBoardsStore = create((set) => ({
         arrOfBoards: updated_arrOfBoards,
       };
     }),
-    delete_task_r: () =>
+  delete_task_r: () =>
     set((state) => {
       const selectedBoardIndex = +state.selected_board;
       const selectedTaskColumnIndex = +state.selected_task_column;
       const selectedTaskIndex = +state.selected_task;
-  
+
       // Copy the existing state
       const updatedArrOfBoards = [...state.arrOfBoards];
-  
+
       // Get the selected board
       const selectedBoard = updatedArrOfBoards[selectedBoardIndex];
-  
+
       // Get the selected column
       const selectedColumn = selectedBoard.columns[selectedTaskColumnIndex];
-  
+
       // Filter out the selected task from the column's tasks
-      const updatedTasks = selectedColumn.tasks.filter((task, i) => i !== selectedTaskIndex);
-  
+      const updatedTasks = selectedColumn.tasks.filter(
+        (task, i) => i !== selectedTaskIndex
+      );
+
       // Create a new column with the updated tasks
       const updatedColumn = { ...selectedColumn, tasks: updatedTasks };
-  
+
       // Create a new board with the updated column
       const updatedBoard = {
         ...selectedBoard,
@@ -164,23 +166,46 @@ let addBoardsStore = create((set) => ({
           index === selectedTaskColumnIndex ? updatedColumn : col
         ),
       };
-  
+
       // Update the selected board in the array of boards
       updatedArrOfBoards[selectedBoardIndex] = updatedBoard;
-  
+
       return {
         arrOfBoards: updatedArrOfBoards,
         selected_task_column: 0,
         selected_task: 0,
       };
     }),
-  
+
   // todo ===================================================================================
   // todo : selected task reducers
   // todo ==============================================================================
   selected_task_r: (st) => set((state) => ({ selected_task: st })),
   selected_task_column_r: (st) =>
     set((state) => ({ selected_task_column: st })),
+  // todo ===================================================================================
+  // todo : updating  board reducers
+  // todo ==============================================================================
+  updateBoard_r: () =>
+    set((state) => {
+      const { selected_board, newBoard } = state;
+
+      if (selected_board !== null && selected_board !== undefined) {
+        const updated_arrOfBoards = [...state.arrOfBoards];
+        updated_arrOfBoards[selected_board] = newBoard;
+
+        return {
+          arrOfBoards: updated_arrOfBoards,
+          newBoard: {
+            id: "",
+            name: "",
+            columns: [],
+          },
+        };
+      }
+
+      return state;
+    }),
 }));
 
 // making this store like localStorage
