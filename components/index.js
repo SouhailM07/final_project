@@ -11,3 +11,4 @@ export { default as DeleteTask_panel } from "./DeleteTask_panel/DeleteTask_panel
 export { default as UpdateBoard_panel } from "./UpdateBoard_panel/UpdateBoard_panel";
 export { default as UpdateTask_panel } from "./UpdateTask_panel/UpdateTask_panel";
 export { default as ToggleMode } from "./ToggleMode/ToggleMode";
+export { default as Menubar_mobile } from "./Menubar_mobile/Menubar_mobile";
