@@ -10,7 +10,7 @@
 #BoardName {
   @apply flex flex-col;
   @apply my-[1rem];
-  @apply text-white;
+  @apply dark:text-white;
 }
 
 #BoardName input {

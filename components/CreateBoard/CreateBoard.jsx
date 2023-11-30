@@ -35,7 +35,7 @@ export default function CreateBoard() {
             className="Panel-transparentBackground"
           ></div>
           <div id="CreateBoard-container" className="Panel-container">
-            <h3>Add New Board</h3>
+            <h2 className="Panel-title">Add New Board</h2>
             <BoardName />
             <BoardColumns />
           </div>

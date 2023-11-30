@@ -25,11 +25,11 @@ export default function Main() {
   useEffect(() => {}, [selected_board]);
   return (
     <>
-      <div className="border-2 px-[1rem] dark:text-white border-yellow-400 w-full  flex space-x-[1rem] overflow-auto">
+      <div className=" px-[1rem] overflow-auto flex dark:text-white w-auto space-x-[1rem] ">
         {arrOfBoards[selected_board]?.columns?.map((e, i) => {
           return (
-            <div key={i} className="border-2 px-[1rem] w-[20rem] ">
-              <h3 className="my-[1rem]">
+            <div key={i} className=" px-[1rem] min-w-[20rem] ">
+              <h3 className="my-[1rem] text-[1.6rem] text-grayishText">
                 {e.input} ({e.tasks.length})
               </h3>
               <ul>
@@ -37,9 +37,9 @@ export default function Main() {
                   return (
                     <li
                       onClick={async () => {
-                        console.log(`the element is :`);
-                        console.log(e);
-                        console.log(`the index is : ${i}`);
+                        // console.log(`the element is :`);
+                        // console.log(e);
+                        // console.log(`the index is : ${i}`);
                         //
                         await selected_task_column_r(e.ColumnIndex);
                         await taskPanel_tg_r(true);
@@ -49,12 +49,12 @@ export default function Main() {
                         );
                       }}
                       key={i}
-                      className="shadow-xl flex flex-col my-[1rem] justify-around px-[1rem] py-[1.2rem] bg-l_component dark:bg-d_component rounded-xl"
+                      className=" shadow-xl flex flex-col my-[1rem] justify-around px-[1rem] py-[1.2rem] bg-l_component dark:bg-d_component rounded-xl"
                     >
                       <h2 className="text-[1.5rem] font-bold my-3">
                         {e.taskName}
                       </h2>
-                      <div className="space-x-1 ">
+                      <div className="space-x-1 text-grayishText">
                         <span>
                           {
                             e?.subtasks.filter((e, i) => {
@@ -63,7 +63,7 @@ export default function Main() {
                           }
                         </span>
                         <span>of</span>
-                        <span>{e.subtasks.length}</span>
+                        <span>{e.subtasks.length} completed tasks</span>
                       </div>
                     </li>
                   );

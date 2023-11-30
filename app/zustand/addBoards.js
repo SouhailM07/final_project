@@ -94,11 +94,12 @@ let addBoardsStore = create(
         set((state) => ({
           newTask: {
             ...state.newTask,
-            ColumnsAvailable: [
-              ...state.arrOfBoards[state.selected_board]?.columns,
-            ],
+            ColumnsAvailable: state.arrOfBoards[
+              state.selected_board
+            ]?.columns.map((column, index) => index),
           },
         })),
+
       edit_newTask_index_r: (st) =>
         set((state) => ({
           newTask: {
@@ -383,52 +384,57 @@ let addBoardsStore = create(
             arrOfBoards: updated_arrOfBoards,
           };
         }),
-      updateTask_subtasks_r: (st) =>
+      updateTask_status: () =>
         set((state) => {
-          const updated_arrOfBoards = state.arrOfBoards.map(
-            (board, boardIndex) => {
-              if (boardIndex == state.selected_board) {
-                const updatedColumns = board.columns.map(
-                  (column, columnIndex) => {
-                    if (columnIndex == state.selected_task_column) {
-                      const updatedTasks = column.tasks.map(
-                        (task, taskIndex) => {
-                          if (taskIndex == state.selected_task) {
-                            return {
-                              ...task,
-                              subtasks: st,
-                            };
-                          } else {
-                            return task;
-                          }
-                        }
-                      );
+          const selectedBoardIndex = +state.selected_board;
+          const selectedTaskColumnIndex = +state.selected_task_column;
+          const selectedTaskIndex = +state.selected_task;
+          const selectedStatusToMove = +state.selected_status_to_move;
 
-                      return {
-                        ...column,
-                        tasks: updatedTasks,
-                      };
-                    } else {
-                      return column;
-                    }
-                  }
-                );
+          // Copy the existing state
+          const updatedArrOfBoards = [...state.arrOfBoards];
 
-                return {
-                  ...board,
-                  columns: updatedColumns,
-                };
-              } else {
-                return board;
-              }
-            }
-          );
+          // Get the selected board
+          const selectedBoard = updatedArrOfBoards[selectedBoardIndex];
+
+          // Get the selected column
+          const selectedColumn = selectedBoard.columns[selectedTaskColumnIndex];
+
+          // Get the selected task
+          const selectedTask = selectedColumn.tasks[selectedTaskIndex];
+
+          // Check if the ColumnIndex property is not the same as selected_status_to_move
+          if (selectedTask.ColumnIndex != selectedStatusToMove) {
+            // Update the ColumnIndex property of the selected task
+            selectedTask.ColumnIndex = selectedStatusToMove;
+
+            // Update the ColumnsAvailable property of the selected task
+            selectedTask.ColumnsAvailable = selectedBoard.columns[
+              selectedStatusToMove
+            ].tasks.map((task, index) => index);
+
+            // Remove the selected task from its original column
+            selectedColumn.tasks = selectedColumn.tasks.filter(
+              (task, i) => i != selectedTaskIndex
+            );
+
+            // Add the selected task to the new column
+            selectedBoard.columns[selectedStatusToMove].tasks.push(
+              selectedTask
+            );
+
+            // Update the selected column in the selected board
+            selectedBoard.columns[selectedTaskColumnIndex] = selectedColumn;
+          }
+
+          // Update the selected board in the array of boards
+          updatedArrOfBoards[selectedBoardIndex] = selectedBoard;
 
           return {
-            ...state,
-            arrOfBoards: updated_arrOfBoards,
+            arrOfBoards: updatedArrOfBoards,
           };
         }),
+
       updateTask_subtask_r: (st) =>
         set((state) => {
           const updated_arrOfBoards = state.arrOfBoards.map(

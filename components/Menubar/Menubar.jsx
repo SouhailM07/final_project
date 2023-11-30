@@ -31,15 +31,15 @@ export default function Menubar() {
     <>
       <motion.aside animate={{ x: showMenuBar ? "-20rem" : 0 }}>
         <div id="Menubar-s1">
-          <div className="pl-[1rem]">
-            ALL BOARDS <span>({arrOfBoards.length})</span>
+          <div className="pl-[1rem] text-grayishText">
+            ALL BOARDS <span> ({arrOfBoards.length}) </span>
           </div>
           <Boards />
           <button
             onClick={() => {
               createBoard_tg_r(true);
             }}
-            className="border-2 border-red-500 py-[1rem] hover:dark:bg-white hover:bg-l_body rounded-r-full"
+            className=" py-[1rem] hover:dark:bg-white hover:bg-l_body rounded-r-full"
           >
             <Image src={layoutLogo} alt="img" />
             <span>Create New Board</span>
@@ -48,7 +48,7 @@ export default function Menubar() {
         {/*  */}
         <div id="Menubar-s2">
           <ToggleMode />
-          <div>hide SideBar</div>
+          {/* <div>hide SideBar</div> */}
         </div>
       </motion.aside>
     </>
@@ -60,7 +60,6 @@ export default function Menubar() {
 /*=======================================================================================*/
 
 let ToggleMode = () => {
-  let [q, setQ] = useState(false);
   const darkMode_tg = useToggleStore((state) => state.darkMode_tg);
   const darkMode_tg_r = useToggleStore((state) => state.darkMode_tg_r);
   let toggleTheme = () => {

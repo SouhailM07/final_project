@@ -41,7 +41,7 @@ export default function UpdateTask_panel() {
           className="Panel-transparentBackground"
         ></div>
         <div className="Panel-container">
-          <h2 className="Panel-title">Edit Task</h2>
+          <h2 className="Panel-title italic">Edit Task</h2>
           {/*  */}
           <div>
             <label htmlFor="">Task Name</label>

@@ -42,7 +42,12 @@ export default function SelectedTask_panel() {
       <div className="Panel z-[7]">
         <div
           onClick={() => {
-            updateTask_status();
+            if (
+              selected_task_details != null &&
+              selected_task_details != undefined
+            ) {
+              // updateTask_status();
+            }
             taskPanel_tg_r(false);
           }}
           className="Panel-transparentBackground"
@@ -107,8 +112,8 @@ export default function SelectedTask_panel() {
               onChange={(e) => {
                 // ! the key to solve the final problem
                 selected_status_to_move_r(e.target.value);
-                console.log("the keyyy is  =>");
-                console.log(e.target.value);
+                // console.log("the keyyy is  =>");
+                // console.log(e.target.value);
                 // edit_newTask_index_r(e.target.value);
               }}
             >

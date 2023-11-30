@@ -135,3 +135,26 @@ html {
 .Setting_panel button {
   @apply w-full text-left p-2;
 }
+
+input[type="text"] {
+  @apply dark:text-white text-black;
+}
+
+/* For WebKit (e.g., Chrome, Safari) */
+::-webkit-scrollbar {
+  @apply w-[9px] h-[10px];
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full;
+  @apply bg-act;
+}
+
+/* For scrollbar handle or thumb */
+::-webkit-scrollbar-thumb {
+  @apply bg-act;
+}
+
+body {
+  @apply dark:bg-d_body bg-l_body;
+}

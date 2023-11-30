@@ -17,6 +17,7 @@ module.exports = {
         l_txt: "black",
         d_txt: "white",
         m_txt: "#9CA3AF",
+        grayishText: "#918D89",
       },
     },
   },
