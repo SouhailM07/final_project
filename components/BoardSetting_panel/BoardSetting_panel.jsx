@@ -18,7 +18,7 @@ export default function BoardSetting_panel() {
 
   return (
     <>
-      <div id="BoardSetting_panel">
+      <div id="BoardSetting_panel" className="Setting_panel">
         <button
           onClick={() => {
             updateBoard_panel_tg_r(true);

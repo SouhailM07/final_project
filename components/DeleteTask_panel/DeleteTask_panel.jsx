@@ -75,7 +75,7 @@ export default function DeleteTask_panel() {
 
                   // board_settings_tg_r();
                 }}
-                className=" bg-white text-act"
+                className=" dark:bg-white text-act bg-l_body"
               >
                 Cancel
               </button>

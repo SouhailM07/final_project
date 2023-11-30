@@ -1,13 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-#BoardSetting_panel {
-  @apply absolute flex flex-col items-start justify-center rounded-xl shadow-xl;
-  @apply px-[1rem]  w-[10rem] h-[6rem] translate-x-[-10rem] translate-y-[1rem];
-  @apply bg-l_component dark:bg-d_component;
-}
-
-#BoardSetting_panel button {
-  @apply w-full text-left p-2;
-}

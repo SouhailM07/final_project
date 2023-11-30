@@ -161,7 +161,7 @@ let Subtasks = () => {
 let ADD_NEW_SUBTASK_BTN = ({ fnc }) => {
   return (
     <>
-      <button id="ADD_NEW_SUBTASK_BTN" onClick={fnc}>
+      <button className="Panel_addNew_btn" onClick={fnc}>
         <Image
           src={plusLogo}
           alt="plus logo"

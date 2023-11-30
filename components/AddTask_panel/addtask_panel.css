@@ -25,13 +25,6 @@
   @apply bg-transparent;
 }
 
-
-#ADD_NEW_SUBTASK_BTN {
-  @apply rounded-full flex items-center justify-center font-bold;
-  @apply my-[1rem] py-[0.6rem] space-x-[1rem] text-[1.1rem] w-full;
-  @apply bg-gray-600 text-act;
-}
-
 #CREATE_TASK_BTN {
   @apply rounded-full flex  justify-center  font-bold;
   @apply py-[0.6rem] space-x-[1rem] text-[1.1rem] w-full;

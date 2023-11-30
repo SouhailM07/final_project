@@ -61,9 +61,10 @@ export default function Menubar() {
 
 let ToggleMode = () => {
   let [q, setQ] = useState(false);
-
+  const darkMode_tg = useToggleStore((state) => state.darkMode_tg);
+  const darkMode_tg_r = useToggleStore((state) => state.darkMode_tg_r);
   let toggleTheme = () => {
-    document.documentElement.className = q ? "dark" : "light";
+    document.documentElement.className = darkMode_tg ? "dark" : "light";
   };
 
   return (
@@ -71,11 +72,11 @@ let ToggleMode = () => {
       <Image src={sunLogo} alt="logo" />
       <motion.button
         onClick={() => {
-          setQ(!q);
+          darkMode_tg_r();
           toggleTheme();
         }}
         transition={{ duration: 0.1, type: "spring" }}
-        animate={{ paddingLeft: !q ? "30px" : "5px" }}
+        animate={{ paddingLeft: darkMode_tg ? "30px" : "5px" }}
       >
         <div></div>
       </motion.button>

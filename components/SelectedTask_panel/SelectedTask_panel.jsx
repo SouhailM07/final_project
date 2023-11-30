@@ -83,7 +83,7 @@ export default function SelectedTask_panel() {
                   onClick={() => {
                     updateTask_subtask_r(i);
                   }}
-                  className="bg-d_body h-[4rem] items-center my-[1rem] rounded-lg flex"
+                  className="bg-l_body dark:bg-d_body h-[4rem] items-center my-[1rem] rounded-lg flex"
                 >
                   <input
                     type="checkbox"
@@ -137,7 +137,7 @@ let TaskSettings_panel = () => {
   );
   return (
     <>
-      <div className=" translate-y-[1rem] translate-x-[-6rem] absolute flex flex-col bg-d_body h-[5rem] w-[10rem] justify-between py-[0.6rem] rounded-xl">
+      <div className="Setting_panel translate-y-[1rem] translate-x-[-6rem]  ">
         <button
           onClick={() => {
             updateTask_panel_tg_r(true);

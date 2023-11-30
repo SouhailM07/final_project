@@ -70,7 +70,7 @@ html {
 .Panel {
   @apply fixed top-0 flex justify-center items-center;
   @apply h-full w-full z-[10];
-  @apply bg-[#0000008a] text-white;
+  @apply bg-[#0000008a] dark:text-white;
 }
 
 .Panel-transparentBackground {
@@ -81,7 +81,7 @@ html {
 .Panel-container {
   @apply relative rounded-xl flex flex-col justify-between;
   @apply min-h-[25rem]  w-[32rem] px-[2rem] py-[2rem];
-  @apply bg-d_component z-[1];
+  @apply dark:bg-d_component bg-l_component z-[1];
 }
 
 .Panel-title {
@@ -94,10 +94,16 @@ html {
   @apply bg-transparent;
 }
 
+.Panel_addNew_btn {
+  @apply rounded-full flex items-center justify-center font-bold;
+  @apply my-[1rem] py-[0.6rem] space-x-[1rem] text-[1.1rem] w-full;
+  @apply bg-gray-600 text-act;
+}
+
 .Panel-endBtn {
   @apply rounded-full flex  justify-center  font-bold;
   @apply py-[0.6rem] space-x-[1rem] text-[1.1rem] w-full;
-  @apply bg-act text-white;
+  @apply bg-act dark:text-white;
 }
 
 .Subtasks ul {
@@ -120,3 +126,12 @@ html {
   @apply bg-transparent;
 }
 
+.Setting_panel {
+  @apply absolute flex flex-col items-start justify-center rounded-xl shadow-xl;
+  @apply px-[1rem]  w-[10rem] h-[6rem] translate-x-[-10rem] translate-y-[1rem];
+  @apply bg-l_component dark:bg-d_component;
+}
+
+.Setting_panel button {
+  @apply w-full text-left p-2;
+}
