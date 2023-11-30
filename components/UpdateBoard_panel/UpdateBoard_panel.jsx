@@ -104,6 +104,10 @@ let BoardColumns = ({ boardName_state }) => {
   const updateBoard_panel_tg_r = useToggleStore(
     (state) => state.updateBoard_panel_tg_r
   );
+  const update_newTask_columnsAvailable_r = addBoardsStore(
+    (state) => state.update_newTask_columnsAvailable_r
+  );
+  useEffect(() => {}, [boardCols]);
   return (
     <>
       <ul className="my-[1rem]">
@@ -133,10 +137,11 @@ let BoardColumns = ({ boardName_state }) => {
         + Add New Column
       </button>
       <button
-        onClick={() => {
-          updateBoard_name_r(boardName_state);
-          updateBoard_columns_r(boardCols);
-          updateBoard_panel_tg_r(false);
+        onClick={async () => {
+          await updateBoard_name_r(boardName_state);
+          await updateBoard_columns_r(boardCols);
+          await updateBoard_panel_tg_r(false);
+          // await update_newTask_columnsAvailable_r();
           console.log(arrOfBoards);
         }}
         className="CREATE_NEW_BOARD_BTN"

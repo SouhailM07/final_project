@@ -182,7 +182,7 @@ let StatusTask = () => {
   const selected_board = addBoardsStore((state) => state.selected_board);
   return (
     <>
-      <div id="StatusTask">
+      <div className="StatusTask">
         <h3>STATUS</h3>
         <select
           onChange={(e) => {
@@ -210,6 +210,9 @@ let CREATE_TASK_BTN = ({ subtasks_data }) => {
   );
   const add_newTask_r = addBoardsStore((state) => state.add_newTask_r);
   const arrOfBoards = addBoardsStore((state) => state.arrOfBoards);
+  const edit_newTask_columnsAvailable_r = addBoardsStore(
+    (state) => state.edit_newTask_columnsAvailable_r
+  );
   return (
     <>
       <button
@@ -217,6 +220,7 @@ let CREATE_TASK_BTN = ({ subtasks_data }) => {
         onClick={async () => {
           edit_newTask_subtasks_r(subtasks_data);
           if (newTask_info.taskName.length > 0) {
+            await edit_newTask_columnsAvailable_r();
             await add_newTask_r();
             console.log(arrOfBoards);
             addTask_tg_r(false);

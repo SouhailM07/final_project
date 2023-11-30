@@ -4,9 +4,9 @@ import { persist } from "zustand/middleware";
 let addBoardsStore = create(
   // persist(
   (set) => ({
-    // ===============
+    // ==
     // states
-    // ===============
+    // ==
     arrOfBoards: [],
     newBoard: {
       id: "",
@@ -19,16 +19,19 @@ let addBoardsStore = create(
       description: "",
       subtasks: [],
       ColumnIndex: 0,
+      ColumnsAvailable: [],
     },
     selected_task_column: "",
     selected_task: "",
     selected_subtask: "",
-    // ===============
+    // ! the key to solve the final problem
+    selected_status_to_move: "",
+    // ==
     //  ! reducers
-    // ===============
-    // todo ===================================================================================
+    // ==
+    // todo ==
     // todo : adding new board reducers
-    // todo ==============================================================================
+    // todo ==
     edit_newBoard_name_r: (st) =>
       set((state) => ({
         newBoard: {
@@ -63,9 +66,9 @@ let addBoardsStore = create(
         };
       }),
     select_the_board: (Index) => set((state) => ({ selected_board: Index })),
-    // ===================================================================================
+    // ==
     // todo : adding new task reducers
-    // ===================================================================================
+    // ==
     edit_newTask_name_r: (st) =>
       set((state) => ({
         newTask: {
@@ -87,6 +90,15 @@ let addBoardsStore = create(
           subtasks: st,
         },
       })),
+    edit_newTask_columnsAvailable_r: (st) =>
+      set((state) => ({
+        newTask: {
+          ...state.newTask,
+          ColumnsAvailable: [
+            ...state.arrOfBoards[state.selected_board]?.columns,
+          ],
+        },
+      })),
     edit_newTask_index_r: (st) =>
       set((state) => ({
         newTask: {
@@ -105,12 +117,12 @@ let addBoardsStore = create(
           let newTasks = [...column.tasks, state.newTask];
 
           let newColumns = board.columns.map((col, index) =>
-            index === taskIndex ? { ...col, tasks: newTasks } : col
+            index == taskIndex ? { ...col, tasks: newTasks } : col
           );
 
           let newBoard = { ...board, columns: newColumns };
           let newBoards = state.arrOfBoards.map((b, index) =>
-            index === boardIndex ? newBoard : b
+            index == boardIndex ? newBoard : b
           );
 
           return {
@@ -127,9 +139,9 @@ let addBoardsStore = create(
           return state;
         }
       }),
-    // todo ===================================================================================
+    // todo ==
     // todo : deleting reducers
-    // todo ==============================================================================
+    // todo ==
     delete_board_r: () =>
       set((state) => {
         const updated_arrOfBoards = state.arrOfBoards.filter((e, i) => {
@@ -166,7 +178,7 @@ let addBoardsStore = create(
         const updatedBoard = {
           ...selectedBoard,
           columns: selectedBoard.columns.map((col, index) =>
-            index === selectedTaskColumnIndex ? updatedColumn : col
+            index == selectedTaskColumnIndex ? updatedColumn : col
           ),
         };
 
@@ -180,19 +192,19 @@ let addBoardsStore = create(
         };
       }),
 
-    // todo ===================================================================================
+    // todo ==
     // todo : selected task reducers
-    // todo ==============================================================================
+    // todo ==
     selected_task_r: (st) => set((state) => ({ selected_task: st })),
     selected_task_column_r: (st) =>
       set((state) => ({ selected_task_column: st })),
-    // todo ===================================================================================
+    // todo ==
     // todo : updating  board reducers
-    // todo ==============================================================================
+    // todo ==
     updateBoard_name_r: (st) =>
       set((state) => {
         const updated_arrOfBoards = state.arrOfBoards.map((board, index) => {
-          if (index === state.selected_board) {
+          if (index == state.selected_board) {
             return {
               ...board,
               name: st,
@@ -209,13 +221,13 @@ let addBoardsStore = create(
     updateBoard_columns_r: (st) =>
       set((state) => {
         const updated_arrOfBoards = state.arrOfBoards.map((board, index) => {
-          if (index === state.selected_board) {
+          if (index == state.selected_board) {
             return {
               ...board,
               columns: st,
             };
           } else {
-            return columns;
+            return board;
           }
         });
 
@@ -223,19 +235,19 @@ let addBoardsStore = create(
           arrOfBoards: updated_arrOfBoards,
         };
       }),
-    // todo ===================================================================================
+    // todo ==
     // todo : updating  task reducers
-    // todo ==============================================================================
+    // todo ==
     updateTask_name_r: (st) =>
       set((state) => {
         const updated_arrOfBoards = state.arrOfBoards.map(
           (board, boardIndex) => {
-            if (boardIndex === state.selected_board) {
+            if (boardIndex == state.selected_board) {
               const updatedColumns = board.columns.map(
                 (column, columnIndex) => {
-                  if (columnIndex === state.selected_task_column) {
+                  if (columnIndex == state.selected_task_column) {
                     const updatedTasks = column.tasks.map((task, taskIndex) => {
-                      if (taskIndex === state.selected_task) {
+                      if (taskIndex == state.selected_task) {
                         return {
                           ...task,
                           taskName: st,
@@ -270,16 +282,67 @@ let addBoardsStore = create(
           arrOfBoards: updated_arrOfBoards,
         };
       }),
+    update_newTask_columnsAvailable_r: (st) =>
+      set((state) => {
+        const updated_arrOfBoards = state.arrOfBoards.map(
+          (board, boardIndex) => {
+            if (boardIndex == state.selected_board) {
+              const updatedColumns = board.columns.map(
+                (column, columnIndex) => {
+                  if (columnIndex == state.selected_task_column) {
+                    const updatedTasks = column.tasks.map((task, taskIndex) => {
+                      if (taskIndex == state.selected_task) {
+                        return {
+                          ...task,
+                          ColumnsAvailable: st,
+                        };
+                      } else {
+                        return task;
+                      }
+                    });
+
+                    return {
+                      ...column,
+                      tasks: updatedTasks,
+                    };
+                  } else {
+                    return column;
+                  }
+                }
+              );
+
+              return {
+                ...board,
+                columns: updatedColumns,
+              };
+            } else {
+              return board;
+            }
+          }
+        );
+
+        return {
+          ...state,
+          newTask: {
+            ...state.newTask,
+            ColumnsAvailable: [
+              ...state.arrOfBoards[state.selected_board]?.columns,
+            ],
+          },
+          arrOfBoards: updated_arrOfBoards,
+        };
+      }),
+
     updateTask_description_r: (st) =>
       set((state) => {
         const updated_arrOfBoards = state.arrOfBoards.map(
           (board, boardIndex) => {
-            if (boardIndex === state.selected_board) {
+            if (boardIndex == state.selected_board) {
               const updatedColumns = board.columns.map(
                 (column, columnIndex) => {
-                  if (columnIndex === state.selected_task_column) {
+                  if (columnIndex == state.selected_task_column) {
                     const updatedTasks = column.tasks.map((task, taskIndex) => {
-                      if (taskIndex === state.selected_task) {
+                      if (taskIndex == state.selected_task) {
                         return {
                           ...task,
                           description: st,
@@ -318,12 +381,12 @@ let addBoardsStore = create(
       set((state) => {
         const updated_arrOfBoards = state.arrOfBoards.map(
           (board, boardIndex) => {
-            if (boardIndex === state.selected_board) {
+            if (boardIndex == state.selected_board) {
               const updatedColumns = board.columns.map(
                 (column, columnIndex) => {
-                  if (columnIndex === state.selected_task_column) {
+                  if (columnIndex == state.selected_task_column) {
                     const updatedTasks = column.tasks.map((task, taskIndex) => {
-                      if (taskIndex === state.selected_task) {
+                      if (taskIndex == state.selected_task) {
                         return {
                           ...task,
                           subtasks: st,
@@ -362,15 +425,15 @@ let addBoardsStore = create(
       set((state) => {
         const updated_arrOfBoards = state.arrOfBoards.map(
           (board, boardIndex) => {
-            if (boardIndex === state.selected_board) {
+            if (boardIndex == state.selected_board) {
               const updatedColumns = board.columns.map(
                 (column, columnIndex) => {
-                  if (columnIndex === state.selected_task_column) {
+                  if (columnIndex == state.selected_task_column) {
                     const updatedTasks = column.tasks.map((task, taskIndex) => {
-                      if (taskIndex === state.selected_task) {
+                      if (taskIndex == state.selected_task) {
                         const updatedSubtasks = task.subtasks.map(
                           (subtask, subtaskIndex) => {
-                            if (subtaskIndex === st) {
+                            if (subtaskIndex == st) {
                               return {
                                 ...subtask,
                                 // Replace 'state' with the actual property you want to update.
@@ -416,6 +479,8 @@ let addBoardsStore = create(
           arrOfBoards: updated_arrOfBoards,
         };
       }),
+    selected_status_to_move_r: (st) =>
+      set((state) => ({ selected_status_to_move: st })),
   })
   // { name: "addBoardsStore" }
   // )

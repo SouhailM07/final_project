@@ -18,6 +18,9 @@ export default function Main() {
   const selected_task_column_r = addBoardsStore(
     (state) => state.selected_task_column_r
   );
+  const update_newTask_columnsAvailable_r = addBoardsStore(
+    (state) => state.update_newTask_columnsAvailable_r
+  );
   // let arrOfBoards = useSelector((state) => state.add_boards.arrOfBoards);
   useEffect(() => {}, [selected_board]);
   return (
@@ -33,14 +36,17 @@ export default function Main() {
                 {e.tasks.map((e, i) => {
                   return (
                     <li
-                      onClick={() => {
+                      onClick={async () => {
                         console.log(`the element is :`);
                         console.log(e);
                         console.log(`the index is : ${i}`);
                         //
-                        selected_task_column_r(e.ColumnIndex);
-                        taskPanel_tg_r(true);
-                        selected_task_r(i);
+                        await selected_task_column_r(e.ColumnIndex);
+                        await taskPanel_tg_r(true);
+                        await selected_task_r(i);
+                        await update_newTask_columnsAvailable_r(
+                          arrOfBoards[selected_board]?.columns
+                        );
                       }}
                       key={i}
                       className="flex flex-col my-[1rem] justify-around px-[1rem] h-[6rem] bg-d_component rounded-xl"

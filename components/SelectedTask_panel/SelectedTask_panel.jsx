@@ -30,6 +30,9 @@ export default function SelectedTask_panel() {
   let updateTask_subtask_r = addBoardsStore(
     (state) => state.updateTask_subtask_r
   );
+  let selected_status_to_move_r = addBoardsStore(
+    (state) => state.selected_status_to_move_r
+  );
   useEffect(() => {
     console.log(selected_task_details);
   }, [taskPanel_tg, arrOfBoards]);
@@ -82,6 +85,8 @@ export default function SelectedTask_panel() {
                     type="checkbox"
                     name=""
                     id={i}
+                    // ! dont remove it , it's here so that you dont get err in the console
+                    onChange={() => {}}
                     checked={e.state == true}
                     className="mx-[1rem] "
                   />
@@ -96,16 +101,20 @@ export default function SelectedTask_panel() {
             <h3>Current Status</h3>
             <select
               onChange={(e) => {
+                // ! the key to solve the final problem
+                selected_status_to_move_r(e.target.value);
+                console.log("the keyyy is  =>");
+                console.log(e.target.value);
                 // edit_newTask_index_r(e.target.value);
               }}
             >
-              {/* {arrOfBoards[+selected_board]?.columns.map((e, i) => {
+              {selected_task_details?.ColumnsAvailable.map((e, i) => {
                 return (
                   <option key={i} value={i}>
-                  {e[`input`]}
+                    {e[`input`]}
                   </option>
-                  );
-                })} */}
+                );
+              })}
             </select>
           </div>
         </div>
