@@ -5,7 +5,7 @@
 aside {
   @apply flex flex-col justify-between relative;
   @apply w-[25rem] text-[1.2rem];
-  @apply bg-d_component text-white;
+  @apply dark:bg-d_component bg-l_component dark:text-white;
 }
 
 #Menubar-s1 {
@@ -27,13 +27,13 @@ aside {
 #ToggleMode {
   @apply flex m-auto items-center justify-center rounded-xl;
   @apply w-[95%] h-[5rem] space-x-[1rem];
-  @apply bg-d_body;
+  @apply dark:bg-d_body bg-l_body;
 }
 
 #ToggleMode button {
   @apply rounded-full;
   @apply w-[4rem] h-[2rem];
-  @apply bg-act;
+  @apply dark:bg-act bg-gray-500;
 }
 
 #ToggleMode button div {
@@ -49,7 +49,7 @@ aside {
 aside ul li input[type="radio"] ~ label {
   @apply flex rounded-r-full items-center space-x-3;
   @apply py-[0.7rem] pl-[1rem] max-w-[15rem] my-[1rem];
-  @apply hover:bg-l_component hover:text-act;
+  @apply hover:dark:bg-l_component hover:text-act hover:bg-l_body;
 }
 
 input[type="radio"]:checked + label {
@@ -60,5 +60,5 @@ input[type="radio"]:checked + label {
 #Boards {
   @apply font-bold capitalize border-2;
   @apply h-[40rem] overflow-auto;
-  @apply text-white;
+  @apply dark:bg-d_component bg-l_component dark:text-white;
 }

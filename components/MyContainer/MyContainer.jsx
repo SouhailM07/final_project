@@ -29,6 +29,7 @@ export default function MyContainer() {
   const updateTask_panel_tg = useToggleStore(
     (state) => state.updateTask_panel_tg
   );
+  document.documentElement.className = "dark";
   return (
     <>
       <div className="h-screen  bg-d_body ">

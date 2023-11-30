@@ -39,7 +39,7 @@ export default function Menubar() {
             onClick={() => {
               createBoard_tg_r(true);
             }}
-            className="border-2 border-red-500 py-[1rem] hover:bg-white"
+            className="border-2 border-red-500 py-[1rem] hover:dark:bg-white hover:bg-l_body rounded-r-full"
           >
             <Image src={layoutLogo} alt="img" />
             <span>Create New Board</span>
@@ -108,7 +108,6 @@ let Boards = () => {
                 htmlFor={e.id}
                 // ! you were looking for this
                 onClick={() => {
-                  // dispatch(select_the_board(e));
                   select_the_board(i);
                   console.log("check this selected board");
                   console.log(e);
