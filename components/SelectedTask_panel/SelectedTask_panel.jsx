@@ -35,8 +35,9 @@ export default function SelectedTask_panel() {
   );
   let updateTask_status = addBoardsStore((state) => state.updateTask_status);
   useEffect(() => {
-    console.log(selected_task_details);
-  }, [taskPanel_tg, arrOfBoards]);
+    // console.log(selected_task_details);
+    console.log(arrOfBoards[+selected_board]?.columns);
+  }, [arrOfBoards]);
   return (
     <>
       <div className="Panel z-[7]">

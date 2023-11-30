@@ -20,7 +20,7 @@ aside {
 }
 
 #Menubar-s2 {
-  @apply h-[20rem]  pt-[1rem];
+  @apply h-[14rem]  pt-[1rem];
 }
 
 #ToggleMode {
@@ -37,7 +37,7 @@ aside {
 
 #ToggleMode button div {
   @apply rounded-full;
-  @apply h-[1.5rem] w-[1.5rem];
+  @apply min-h-[1.5rem] w-[1.5rem];
   @apply bg-white;
 }
 
@@ -58,6 +58,6 @@ input[type="radio"]:checked + label {
 
 #Boards {
   @apply font-bold capitalize;
-  @apply min-h-[10rem] max-h-[23rem] overflow-auto;
+  @apply min-h-[1rem] max-h-[23rem] overflow-auto;
   @apply dark:bg-d_component bg-l_component dark:text-white;
 }
