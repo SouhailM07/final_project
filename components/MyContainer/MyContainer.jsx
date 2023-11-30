@@ -32,7 +32,7 @@ export default function MyContainer() {
   document.documentElement.className = "dark";
   return (
     <>
-      <div className="h-screen  bg-d_body ">
+      <div className="h-screen  dark:bg-d_body bg-l_body">
         <Navbar />
         {/* PANELS */}
         <CreateBoard />

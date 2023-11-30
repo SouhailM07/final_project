@@ -25,10 +25,10 @@ export default function Main() {
   useEffect(() => {}, [selected_board]);
   return (
     <>
-      <div className="border-2 px-[1rem] border-yellow-400 w-full  flex space-x-[1rem] overflow-auto">
+      <div className="border-2 px-[1rem] dark:text-white border-yellow-400 w-full  flex space-x-[1rem] overflow-auto">
         {arrOfBoards[selected_board]?.columns?.map((e, i) => {
           return (
-            <div key={i} className="border-2 px-[1rem] w-[20rem] text-white">
+            <div key={i} className="border-2 px-[1rem] w-[20rem] ">
               <h3 className="my-[1rem]">
                 {e.input} ({e.tasks.length})
               </h3>
@@ -49,9 +49,11 @@ export default function Main() {
                         );
                       }}
                       key={i}
-                      className="flex flex-col my-[1rem] justify-around px-[1rem] h-[6rem] bg-d_component rounded-xl"
+                      className="shadow-xl flex flex-col my-[1rem] justify-around px-[1rem] py-[1.2rem] bg-l_component dark:bg-d_component rounded-xl"
                     >
-                      <h2 className="text-[1.5rem] ">{e.taskName}</h2>
+                      <h2 className="text-[1.5rem] font-bold my-3">
+                        {e.taskName}
+                      </h2>
                       <div className="space-x-1 ">
                         <span>
                           {
