@@ -62,11 +62,18 @@ export default function Menubar() {
 let ToggleMode = () => {
   let [q, setQ] = useState(false);
 
+  let toggleTheme = () => {
+    document.documentElement.className = q ? "dark" : "light";
+  };
+
   return (
     <div id="ToggleMode">
       <Image src={sunLogo} alt="logo" />
       <motion.button
-        onClick={() => setQ(!q)}
+        onClick={() => {
+          setQ(!q);
+          toggleTheme();
+        }}
         transition={{ duration: 0.1, type: "spring" }}
         animate={{ paddingLeft: !q ? "30px" : "5px" }}
       >

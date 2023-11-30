@@ -18,7 +18,7 @@ export default function BoardSetting_panel() {
 
   return (
     <>
-      <div className=" absolute flex flex-col items-start px-[1rem] space-y-3 w-[10rem] h-[5rem] translate-x-[-10rem] translate-y-[1rem] bg-d_component rounded-xl">
+      <div id="BoardSetting_panel">
         <button
           onClick={() => {
             updateBoard_panel_tg_r(true);

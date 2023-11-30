@@ -537,7 +537,7 @@ let addBoardsStore = create(
           };
         }),
     }),
-    { name: "addBoardsStore_1" }
+    { name: "addBoardsStore_3" }
   )
 );
 
