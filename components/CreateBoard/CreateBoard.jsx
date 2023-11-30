@@ -60,7 +60,7 @@ let BoardName = () => {
         <label htmlFor="boardName">Board Name</label>
         <input
           onChange={(e) => {
-            console.log(newBoard);
+            // console.log(newBoard);
             edit_newBoard_name_r(e.target.value);
           }}
           type="text"

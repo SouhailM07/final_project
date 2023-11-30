@@ -30,7 +30,7 @@ export default function Navbar() {
             <span>Kanban</span>
           </div>
           <div id="Navbar-s1-boardName">
-            {arrOfBoards[+selected_board]?.name}
+            {arrOfBoards[selected_board]?.name}
           </div>
         </div>
         <div id="Navbar-s2">

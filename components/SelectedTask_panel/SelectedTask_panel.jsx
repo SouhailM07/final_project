@@ -33,6 +33,7 @@ export default function SelectedTask_panel() {
   let selected_status_to_move_r = addBoardsStore(
     (state) => state.selected_status_to_move_r
   );
+  let updateTask_status = addBoardsStore((state) => state.updateTask_status);
   useEffect(() => {
     console.log(selected_task_details);
   }, [taskPanel_tg, arrOfBoards]);
@@ -40,7 +41,10 @@ export default function SelectedTask_panel() {
     <>
       <div className="Panel z-[7]">
         <div
-          onClick={() => taskPanel_tg_r(false)}
+          onClick={() => {
+            updateTask_status();
+            taskPanel_tg_r(false);
+          }}
           className="Panel-transparentBackground"
         ></div>
         <div className="Panel-container w-[40rem] min-h-[22rem] px-[2rem] rounded-xl flex flex-col justify-between py-[2rem]">

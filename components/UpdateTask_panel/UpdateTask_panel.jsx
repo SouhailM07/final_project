@@ -195,13 +195,16 @@ let StatusTask = () => {
   let arrOfBoards = addBoardsStore((state) => state.arrOfBoards);
   const selected_board = addBoardsStore((state) => state.selected_board);
   let selected_task_details_columns = arrOfBoards[+selected_board]?.columns;
+  let selected_status_to_move_r = addBoardsStore(
+    (state) => state.selected_status_to_move_r
+  );
   return (
     <>
       <div className="StatusTask">
         <h3>STATUS</h3>
         <select
           onChange={(e) => {
-            // edit_newTask_index_r(e.tarzget.value);
+            selected_status_to_move_r(e.target.value);
           }}
         >
           {selected_task_details_columns.map((e, i) => {
@@ -232,17 +235,19 @@ let CREATE_TASK_BTN = ({
   let updateTask_panel_tg_r = useToggleStore(
     (state) => state.updateTask_panel_tg_r
   );
+  let updateTask_status = addBoardsStore((state) => state.updateTask_status);
+  let taskPanel_tg_r = addBoardsStore((state) => state.taskPanel_tg_r);
   return (
     <>
       <button
         className="Panel-endBtn"
-        onClick={() => {
-          updateTask_name_r(btn_taskName_state);
-          updateTask_description_r(btn_taskDescription_state);
-          updateTask_subtasks_r(subtasks_data);
-          updateTask_panel_tg_r(false);
-
-          // console.log(arrOfBoards);
+        onClick={async () => {
+          await updateTask_name_r(btn_taskName_state);
+          await updateTask_description_r(btn_taskDescription_state);
+          await updateTask_subtasks_r(subtasks_data);
+          await updateTask_status();
+          await updateTask_panel_tg_r(false);
+          taskPanel_tg_r(false);
         }}
       >
         Save changes
