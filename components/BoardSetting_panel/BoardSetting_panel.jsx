@@ -15,12 +15,15 @@ export default function BoardSetting_panel() {
   const updateBoard_panel_tg_r = useToggleStore(
     (state) => state.updateBoard_panel_tg_r
   );
-
+  const board_settings_tg_r = useToggleStore(
+    (state) => state.board_settings_tg_r
+  );
   return (
     <>
       <div id="BoardSetting_panel" className="Setting_panel">
         <button
           onClick={() => {
+            board_settings_tg_r();
             updateBoard_panel_tg_r(true);
           }}
         >
@@ -29,6 +32,7 @@ export default function BoardSetting_panel() {
         <button
           onClick={() => {
             delete_panel_alert_tg_r(true);
+            board_settings_tg_r();
           }}
           className="text-red-500"
         >

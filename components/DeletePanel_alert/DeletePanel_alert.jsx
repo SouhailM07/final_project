@@ -44,7 +44,6 @@ export default function DeletePanel_alert() {
                   onClick={() => {
                     delete_panel_alert_tg_r(false);
                     delete_board_r();
-                    board_settings_tg_r();
                   }}
                   className=" bg-red-500"
                 >

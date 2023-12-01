@@ -15,7 +15,7 @@ const useToggleStore = create((set) => ({
   createBoard_tg_r: (st) => set((state) => ({ createBoard_tg: st })),
   addTask_tg_r: (st) => set((state) => ({ addTask_tg: st })),
   taskPanel_tg_r: (st) => set((state) => ({ taskPanel_tg: st })),
-  board_settings_tg_r: () =>
+  board_settings_tg_r: (st) =>
     set((state) => ({ board_settings_tg: !state.board_settings_tg })),
   delete_panel_alert_tg_r: (st) =>
     set((state) => ({ delete_panel_alert_tg: st })),

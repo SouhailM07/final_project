@@ -36,30 +36,32 @@ export default function Navbar() {
             {arrOfBoards[selected_board]?.name}
           </div>
         </div>
-        <div id="Navbar-s2">
-          <button
-            onClick={() => {
-              addTask_tg_r(true);
-            }}
-            id="Navbar-s2-addBtn"
-          >
-            <Image
-              src={plusLogo}
-              alt=""
-              className="h-[1rem] md:w-[1rem] xs:w-[3rem]"
-            />
-            <span className="xs:hidden md:block">Add New Task</span>
-          </button>
-          <button>
-            <Image
-              onClick={() => board_settings_tg_r()}
-              src={editLogo}
-              alt=""
-              className="h-[2.5rem] w-[3rem]"
-            />
-            {board_settings_tg && <BoardSetting_panel />}
-          </button>
-        </div>
+        {arrOfBoards.length > 0 && (
+          <div id="Navbar-s2">
+            <button
+              onClick={() => {
+                addTask_tg_r(true);
+              }}
+              id="Navbar-s2-addBtn"
+            >
+              <Image
+                src={plusLogo}
+                alt=""
+                className="h-[1rem] md:w-[1rem] xs:w-[3rem]"
+              />
+              <span className="xs:hidden md:block">Add New Task</span>
+            </button>
+            <button>
+              <Image
+                onClick={() => board_settings_tg_r()}
+                src={editLogo}
+                alt=""
+                className="h-[2.5rem] w-[3rem]"
+              />
+              {board_settings_tg && <BoardSetting_panel />}
+            </button>
+          </div>
+        )}
         {menubar_mobile_tg && <Menubar_mobile />}
       </nav>
     </>

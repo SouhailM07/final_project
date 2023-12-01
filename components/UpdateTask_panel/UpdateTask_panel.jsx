@@ -1,6 +1,6 @@
 "use client";
 // hooks
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 // style
 import "./updatetask_panel.css";
 // assets
@@ -40,7 +40,7 @@ export default function UpdateTask_panel() {
           }}
           className="Panel-transparentBackground"
         ></div>
-        <div className="Panel-container">
+        <div className="Panel-container w-[30rem]">
           <h2 className="Panel-title italic">Edit Task</h2>
           {/*  */}
           <div>
@@ -89,7 +89,7 @@ let Subtasks = ({ taskName_state, taskDescription_state }) => {
     (state) => state.selected_task_column
   );
   let selected_task_details =
-    arrOfBoards[+selected_board]?.columns[+selected_task_column]?.tasks[
+    arrOfBoards[selected_board]?.columns[selected_task_column]?.tasks[
       selected_task
     ];
   let [taskSubtasks, setTaskSubtasks] = useState([]);
@@ -229,14 +229,14 @@ let CREATE_TASK_BTN = ({
   let updateTask_description_r = addBoardsStore(
     (state) => state.updateTask_description_r
   );
-  let updateTask_subtasks_r = addBoardsStore(
-    (state) => state.updateTask_subtasks_r
+  let updateTask_subtask_r = addBoardsStore(
+    (state) => state.updateTask_subtask_r
   );
   let updateTask_panel_tg_r = useToggleStore(
     (state) => state.updateTask_panel_tg_r
   );
   let updateTask_status = addBoardsStore((state) => state.updateTask_status);
-  let taskPanel_tg_r = addBoardsStore((state) => state.taskPanel_tg_r);
+  let taskPanel_tg_r = useToggleStore((state) => state.taskPanel_tg_r);
   return (
     <>
       <button
@@ -244,7 +244,7 @@ let CREATE_TASK_BTN = ({
         onClick={async () => {
           await updateTask_name_r(btn_taskName_state);
           await updateTask_description_r(btn_taskDescription_state);
-          await updateTask_subtasks_r(subtasks_data);
+          await updateTask_subtask_r(subtasks_data);
           await updateTask_status();
           await updateTask_panel_tg_r(false);
           taskPanel_tg_r(false);
