@@ -79,7 +79,7 @@ let SelectBoard_mobile = () => {
         className="text-[1.8rem] font-bold xs:flex md:hidden items-center"
       >
         <button className="mr-[5px]">
-          {arrOfBoards[selected_board].name || ""}
+          {arrOfBoards[selected_board]?.name || ""}
         </button>
         <ArrowLogo />
       </div>
