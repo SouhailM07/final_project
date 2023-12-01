@@ -4,7 +4,7 @@
 import "./menubar.css";
 import { motion } from "framer-motion";
 // hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // components
 import { ToggleMode } from "..";
 import axios from "axios";
@@ -68,6 +68,12 @@ let Boards = () => {
   const arrOfBoards = addBoardsStore((state) => state.arrOfBoards);
   const select_the_board = addBoardsStore((state) => state.select_the_board);
   //
+  useEffect(() => {
+    if (arrOfBoards.length > 0) {
+      let firstBoard = document.querySelector("#Boards li label");
+      firstBoard.click();
+    }
+  }, []);
   return (
     <>
       <ul id="Boards">

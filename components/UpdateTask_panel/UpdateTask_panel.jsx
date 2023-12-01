@@ -198,12 +198,19 @@ let StatusTask = () => {
   let selected_status_to_move_r = addBoardsStore(
     (state) => state.selected_status_to_move_r
   );
+  // let [newStatus_location,setNewStatus_location]=useState()
+  let selected_task_details =
+    arrOfBoards[+selected_board]?.columns[+selected_task_column]?.tasks[
+      selected_task
+    ];
   return (
     <>
       <div className="StatusTask">
         <h3>STATUS</h3>
         <select
+          // value={selected_task_details?.ColumnIndex}
           onChange={(e) => {
+            // setNewStatus_location(e.target.value)
             selected_status_to_move_r(e.target.value);
           }}
         >
@@ -245,7 +252,8 @@ let CREATE_TASK_BTN = ({
           await updateTask_name_r(btn_taskName_state);
           await updateTask_description_r(btn_taskDescription_state);
           await updateTask_subtasks_r(subtasks_data);
-          await updateTask_status();
+          // ! you need to provide a way to get the index of the new status onChange
+          // await updateTask_status();
           await updateTask_panel_tg_r(false);
           taskPanel_tg_r(false);
         }}

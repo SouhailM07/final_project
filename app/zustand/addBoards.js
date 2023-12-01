@@ -384,12 +384,12 @@ let addBoardsStore = create(
             arrOfBoards: updated_arrOfBoards,
           };
         }),
-      updateTask_status: () =>
+      updateTask_status: (st) =>
         set((state) => {
-          const selectedBoardIndex = +state.selected_board;
-          const selectedTaskColumnIndex = +state.selected_task_column;
-          const selectedTaskIndex = +state.selected_task;
-          const selectedStatusToMove = +state.selected_status_to_move;
+          const selectedBoardIndex = state.selected_board;
+          const selectedTaskColumnIndex = state.selected_task_column;
+          const selectedTaskIndex = state.selected_task;
+          const selectedStatusToMove = state.selected_status_to_move;
 
           // Copy the existing state
           const updatedArrOfBoards = [...state.arrOfBoards];
@@ -403,7 +403,7 @@ let addBoardsStore = create(
           // Get the selected task
           const selectedTask = selectedColumn.tasks[selectedTaskIndex];
 
-          // Check if the ColumnIndex property is not the same as selected_status_to_move
+          //!!! Check if the ColumnIndex property is not the same as selected_status_to_move
           if (selectedTask.ColumnIndex != selectedStatusToMove) {
             // Update the ColumnIndex property of the selected task
             selectedTask.ColumnIndex = selectedStatusToMove;
@@ -438,13 +438,13 @@ let addBoardsStore = create(
         set((state) => {
           const updated_arrOfBoards = state.arrOfBoards.map(
             (board, boardIndex) => {
-              if (boardIndex === state.selected_board) {
+              if (boardIndex == state.selected_board) {
                 const updatedColumns = board.columns.map(
                   (column, columnIndex) => {
-                    if (columnIndex === state.selected_task_column) {
+                    if (columnIndex == state.selected_task_column) {
                       const updatedTasks = column.tasks.map(
                         (task, taskIndex) => {
-                          if (taskIndex === state.selected_task) {
+                          if (taskIndex == state.selected_task) {
                             return {
                               ...task,
                               subtasks: st,

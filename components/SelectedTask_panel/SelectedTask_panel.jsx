@@ -36,7 +36,8 @@ export default function SelectedTask_panel() {
   let updateTask_status = addBoardsStore((state) => state.updateTask_status);
   useEffect(() => {
     // console.log(selected_task_details);
-    console.log(arrOfBoards[+selected_board]?.columns);
+    // console.log(arrOfBoards[+selected_board]?.columns);
+    // console.log(selected_task_details?.ColumnIndex);
   }, [arrOfBoards]);
   return (
     <>
@@ -110,6 +111,7 @@ export default function SelectedTask_panel() {
           <div className="StatusTask">
             <h3>Current Status</h3>
             <select
+              // value={selected_task_details?.ColumnIndex}
               onChange={(e) => {
                 // ! the key to solve the final problem
                 selected_status_to_move_r(e.target.value);
