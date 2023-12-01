@@ -14,6 +14,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
 }
 .loader {
   display: inline-block;
@@ -80,7 +81,7 @@ html {
 
 .Panel-container {
   @apply relative rounded-xl flex flex-col justify-between;
-  @apply min-h-[25rem]  w-[32rem] px-[2rem] py-[2rem];
+  @apply min-h-[25rem]  max-w-[32rem] mx-[2rem] px-[2rem] py-[2rem];
   @apply dark:bg-d_component bg-l_component z-[1];
 }
 

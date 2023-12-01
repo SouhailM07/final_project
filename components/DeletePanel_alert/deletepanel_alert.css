@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-#DeletePanel_alert-container button {
+.DeletePanel-container button {
   @apply cursor-pointer rounded-full;
-  @apply w-[14rem] py-[0.5rem] text-[1.2rem];
+  @apply xs:w-[45%] w535:w-[14rem] py-[0.5rem] text-[1.2rem];
 }

@@ -1,6 +1,7 @@
 "use client";
 // hooks
-
+import { useEffect, useState } from "react";
+// style
 import "./mycontainer.css";
 // components
 import {
@@ -29,9 +30,10 @@ export default function MyContainer() {
   const updateTask_panel_tg = useToggleStore(
     (state) => state.updateTask_panel_tg
   );
-  const darkMode_tg = useToggleStore((state) => state.darkMode_tg);
-
-  document.documentElement.className = darkMode_tg ? "dark" : "light";
+  // ? const darkMode_tg = useToggleStore((state) => state.darkMode_tg);
+  useEffect(() => {
+    document.documentElement.className = "light";
+  }, []);
   return (
     <>
       <div className="h-screen  dark:bg-d_body bg-l_body">

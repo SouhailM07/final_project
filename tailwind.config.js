@@ -19,6 +19,12 @@ module.exports = {
         m_txt: "#9CA3AF",
         grayishText: "#918D89",
       },
+      screens: {
+        xs: "0px",
+        sm: "425px",
+        w535: "535px",
+        md: "768px",
+      },
     },
   },
   plugins: [],

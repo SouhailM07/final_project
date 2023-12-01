@@ -5,6 +5,7 @@
 aside {
   @apply flex flex-col justify-between relative;
   @apply min-w-[19rem] text-[1.2rem];
+  @apply xs:hidden md:flex;
   @apply dark:bg-d_component bg-l_component dark:text-white;
 }
 
@@ -21,28 +22,6 @@ aside {
 
 #Menubar-s2 {
   @apply h-[14rem]  pt-[1rem];
-}
-
-#ToggleMode {
-  @apply flex m-auto items-center justify-center rounded-xl;
-  @apply w-[95%] h-[5rem] space-x-[1rem];
-  @apply dark:bg-d_body bg-l_body;
-}
-
-#ToggleMode button {
-  @apply rounded-full;
-  @apply w-[4rem] h-[2rem];
-  @apply dark:bg-act bg-gray-500;
-}
-
-#ToggleMode button div {
-  @apply rounded-full;
-  @apply min-h-[1.5rem] w-[1.5rem];
-  @apply bg-white;
-}
-
-#ToggleMode img {
-  @apply h-[2rem] w-[2rem];
 }
 
 aside ul li input[type="radio"] ~ label {

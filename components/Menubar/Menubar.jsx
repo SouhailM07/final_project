@@ -5,6 +5,8 @@ import "./menubar.css";
 import { motion } from "framer-motion";
 // hooks
 import { useState } from "react";
+// components
+import { ToggleMode } from "..";
 import axios from "axios";
 // assets
 import Image from "next/image";
@@ -13,7 +15,7 @@ import sunLogo from "@/public/sun-regular.svg";
 import moonLogo from "@/public/moon-solid.svg";
 import hideLogo from "../../public/eye-slash-regular.svg";
 import showLogo from "../../public/eye-regular.svg";
-
+//
 import useToggleStore from "@/app/zustand/toggle";
 import addBoardsStore from "@/app/zustand/addBoards";
 /*=======================================================================================*/
@@ -58,31 +60,6 @@ export default function Menubar() {
 /*=======================================================================================*/
 // small component section
 /*=======================================================================================*/
-
-let ToggleMode = () => {
-  const darkMode_tg = useToggleStore((state) => state.darkMode_tg);
-  const darkMode_tg_r = useToggleStore((state) => state.darkMode_tg_r);
-  let toggleTheme = () => {
-    document.documentElement.className = darkMode_tg ? "dark" : "light";
-  };
-
-  return (
-    <div id="ToggleMode">
-      <Image src={sunLogo} alt="logo" />
-      <motion.button
-        onClick={() => {
-          darkMode_tg_r();
-          toggleTheme();
-        }}
-        transition={{ duration: 0.1, type: "spring" }}
-        animate={{ paddingLeft: darkMode_tg ? "30px" : "5px" }}
-      >
-        <div></div>
-      </motion.button>
-      <Image src={moonLogo} alt="logo" />
-    </div>
-  );
-};
 
 /*=======================================================================================*/
 

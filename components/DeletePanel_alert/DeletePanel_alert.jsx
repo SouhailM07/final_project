@@ -25,13 +25,13 @@ export default function DeletePanel_alert() {
           <div className="Panel-transparentBackground"></div>
           <div
             id="DeletePanel_alert-container"
-            className="Panel-container px-[2rem] w-[34rem] !min-h-[18rem] rounded-xl flex flex-col items-center justify-between py-[2rem]"
+            className="DeletePanel-container Panel-container px-[2rem] w-[34rem] xs:max-w-[50rem] !min-h-[18rem] rounded-xl flex flex-col items-center justify-between py-[2rem]"
           >
             <h2 className="w-full font-bold text-[2rem] text-red-500">
               Delete this board?
             </h2>
-            <div className=" min-h-[10rem]  my-[1rem] flex flex-col justify-between">
-              <p className="text-[1.2rem]">
+            <div className=" min-h-[10rem]  flex flex-col justify-between">
+              <p className="text-[1.2rem] my-[1rem]">
                 Are you sure you want to delete the
                 <span className="text-red-500">
                   " {arrOfBoards[+selected_board]?.name || "test"} "

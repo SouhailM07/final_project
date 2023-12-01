@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#Menubar_mobile ul li input[type="radio"] ~ label {
+  @apply flex rounded-r-full items-center space-x-3;
+  @apply py-[0.7rem] pl-[1rem] w-[90%] my-[1rem];
+  @apply hover:dark:bg-l_component hover:text-act hover:bg-l_body;
+}
+
+#Menubar_mobile ul {
+  @apply max-h-[13rem] overflow-auto text-[1.4rem];
+}
+
+#createBtn_mobile {
+  @apply flex space-x-3 text-[1.4rem];
+  @apply pl-[1rem];
+  @apply text-act;
+}

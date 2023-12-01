@@ -25,7 +25,7 @@ export default function Main() {
   useEffect(() => {}, [arrOfBoards]);
   return (
     <>
-      <div className=" px-[1rem] overflow-auto flex dark:text-white w-auto space-x-[1rem] ">
+      <div className=" px-[3rem] overflow-auto flex dark:text-white w-auto space-x-[1rem] ">
         {arrOfBoards[selected_board]?.columns?.map((e_column, i_column) => {
           return (
             <div key={i_column} className=" px-[1rem] min-w-[20rem] ">

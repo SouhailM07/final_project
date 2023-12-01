@@ -41,7 +41,7 @@ export default function DeleteTask_panel() {
     <>
       <div id="DeleteTask_panel" className="Panel z-[8]">
         <div className="Panel-transparentBackground"></div>
-        <div className="Panel-container px-[2rem] w-[34rem] min-h-[16rem]  rounded-xl flex flex-col items-center justify-between py-[2rem]">
+        <div className="DeletePanel-container Panel-container px-[2rem] xs:max-w-[50rem]  w-[34rem] min-h-[16rem]  rounded-xl flex flex-col items-center justify-between py-[2rem]">
           <h2 className="w-full font-bold text-[2rem] text-red-500">
             Delete this board?
           </h2>
