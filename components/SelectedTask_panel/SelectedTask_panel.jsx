@@ -51,7 +51,7 @@ export default function SelectedTask_panel() {
               selected_task_details != null &&
               selected_task_details != undefined
             ) {
-              updateTask_status();
+              // updateTask_status();
             }
             taskPanel_tg_r(false);
           }}
@@ -119,6 +119,8 @@ export default function SelectedTask_panel() {
                 // ! the key to solve the final problem
                 setNewColumnIndex(e.target.value);
                 selected_status_to_move_r(e.target.value);
+                updateTask_status();
+                taskPanel_tg_r(false);
                 // console.log("the keyyy is  =>");
                 // console.log(e.target.value);
                 // edit_newTask_index_r(e.target.value);
