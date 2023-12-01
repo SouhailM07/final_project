@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import * as flatted from "flatted";
 
 let addBoardsStore = create(
   persist(
@@ -384,48 +385,59 @@ let addBoardsStore = create(
             arrOfBoards: updated_arrOfBoards,
           };
         }),
-      updateTask_status: (st) =>
+      updateTask_status: () =>
         set((state) => {
-          const selectedBoardIndex = state.selected_board;
-          const selectedTaskColumnIndex = state.selected_task_column;
-          const selectedTaskIndex = state.selected_task;
-          const selectedStatusToMove = state.selected_status_to_move;
+          const selectedBoardIndex = +state.selected_board;
+          const selectedTaskColumnIndex = +state.selected_task_column;
+          const selectedTaskIndex = +state.selected_task;
+          const selectedStatusToMove = +state.selected_status_to_move;
 
           // Copy the existing state
-          const updatedArrOfBoards = [...state.arrOfBoards];
+          const updatedArrOfBoards = state.arrOfBoards.map(
+            (board, boardIndex) => {
+              if (boardIndex === selectedBoardIndex) {
+                const updatedColumns = board.columns.map(
+                  (column, columnIndex) => {
+                    if (columnIndex === selectedTaskColumnIndex) {
+                      const selectedTask = column.tasks[selectedTaskIndex];
 
-          // Get the selected board
-          const selectedBoard = updatedArrOfBoards[selectedBoardIndex];
+                      // Check if the ColumnIndex property is not the same as selected_status_to_move
+                      if (selectedTask.ColumnIndex !== selectedStatusToMove) {
+                        // Remove the selected task from its original column
+                        const updatedTasksOriginal = column.tasks.filter(
+                          (task, i) => i !== selectedTaskIndex
+                        );
 
-          // Get the selected column
-          const selectedColumn = selectedBoard.columns[selectedTaskColumnIndex];
+                        // Create a new task with the updated ColumnIndex
+                        const updatedTask = {
+                          ...selectedTask,
+                          ColumnIndex: selectedStatusToMove,
+                        };
 
-          // Get the selected task
-          const selectedTask = selectedColumn.tasks[selectedTaskIndex];
+                        // Add the selected task to the new column
+                        const updatedTasksNew = [
+                          ...board.columns[selectedStatusToMove].tasks,
+                          updatedTask,
+                        ];
 
-          //!!! Check if the ColumnIndex property is not the same as selected_status_to_move
-          selectedTask.ColumnIndex = selectedStatusToMove;
-          // Remove the selected task from its original column
-          selectedColumn.tasks = selectedColumn.tasks.filter(
-            (task, i) => i != selectedTaskIndex
+                        return { ...column, tasks: updatedTasksOriginal };
+                      }
+                    }
+                    return column;
+                  }
+                );
+
+                return { ...board, columns: updatedColumns };
+              }
+              return board;
+            }
           );
-
-          //! Add the selected task to the new column
-          selectedBoard.columns[selectedStatusToMove].tasks = [
-            ...selectedBoard.columns[selectedStatusToMove].tasks,
-            selectedTask,
-          ];
-
-          // Update the selected column in the selected board
-          selectedBoard.columns[selectedTaskColumnIndex] = selectedColumn;
-
-          // Update the selected board in the array of boards
-          updatedArrOfBoards[selectedBoardIndex] = selectedBoard;
 
           return {
             arrOfBoards: updatedArrOfBoards,
           };
         }),
+
       updateTask_subtasks_r: (st) =>
         set((state) => {
           const updated_arrOfBoards = state.arrOfBoards.map(
@@ -580,7 +592,11 @@ let addBoardsStore = create(
           };
         }),
     }),
-    { name: "addBoardsStore_3" }
+    {
+      name: "addBoardsStore_3",
+      serialize: (state) => flatted.stringify(state),
+      deserialize: (state) => flatted.parse(state),
+    }
   )
 );
 

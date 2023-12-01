@@ -51,7 +51,7 @@ export default function SelectedTask_panel() {
               selected_task_details != null &&
               selected_task_details != undefined
             ) {
-              // updateTask_status();
+              updateTask_status();
             }
             taskPanel_tg_r(false);
           }}
