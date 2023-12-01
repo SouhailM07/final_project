@@ -229,8 +229,8 @@ let CREATE_TASK_BTN = ({
   let updateTask_description_r = addBoardsStore(
     (state) => state.updateTask_description_r
   );
-  let updateTask_subtask_r = addBoardsStore(
-    (state) => state.updateTask_subtask_r
+  let updateTask_subtasks_r = addBoardsStore(
+    (state) => state.updateTask_subtasks_r
   );
   let updateTask_panel_tg_r = useToggleStore(
     (state) => state.updateTask_panel_tg_r
@@ -244,7 +244,7 @@ let CREATE_TASK_BTN = ({
         onClick={async () => {
           await updateTask_name_r(btn_taskName_state);
           await updateTask_description_r(btn_taskDescription_state);
-          await updateTask_subtask_r(subtasks_data);
+          await updateTask_subtasks_r(subtasks_data);
           await updateTask_status();
           await updateTask_panel_tg_r(false);
           taskPanel_tg_r(false);
