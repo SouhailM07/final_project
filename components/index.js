@@ -12,3 +12,4 @@ export { default as UpdateBoard_panel } from "./UpdateBoard_panel/UpdateBoard_pa
 export { default as UpdateTask_panel } from "./UpdateTask_panel/UpdateTask_panel";
 export { default as ToggleMode } from "./ToggleMode/ToggleMode";
 export { default as Menubar_mobile } from "./Menubar_mobile/Menubar_mobile";
+export { default as Toggle_menubar } from "./Toggle_menubar/Toggle_menubar";
