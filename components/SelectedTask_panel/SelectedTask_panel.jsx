@@ -1,7 +1,7 @@
 "use client";
 // style
 import "./selectedtask_panel.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 // assets
 import Image from "next/image";
 import editLogo from "@/public/ellipsis-vertical-solid.svg";
@@ -34,6 +34,9 @@ export default function SelectedTask_panel() {
     (state) => state.selected_status_to_move_r
   );
   let updateTask_status = addBoardsStore((state) => state.updateTask_status);
+  let [newColumnIndex, setNewColumnIndex] = useState(
+    selected_task_details?.ColumnIndex
+  );
   useEffect(() => {
     // console.log(selected_task_details);
     // console.log(arrOfBoards[+selected_board]?.columns);
@@ -111,9 +114,10 @@ export default function SelectedTask_panel() {
           <div className="StatusTask">
             <h3>Current Status</h3>
             <select
-              // value={selected_task_details?.ColumnIndex}
+              value={newColumnIndex}
               onChange={(e) => {
                 // ! the key to solve the final problem
+                setNewColumnIndex(e.target.value);
                 selected_status_to_move_r(e.target.value);
                 // console.log("the keyyy is  =>");
                 // console.log(e.target.value);

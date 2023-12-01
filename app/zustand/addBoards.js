@@ -404,28 +404,20 @@ let addBoardsStore = create(
           const selectedTask = selectedColumn.tasks[selectedTaskIndex];
 
           //!!! Check if the ColumnIndex property is not the same as selected_status_to_move
-          if (selectedTask.ColumnIndex != selectedStatusToMove) {
-            // Update the ColumnIndex property of the selected task
-            selectedTask.ColumnIndex = selectedStatusToMove;
+          selectedTask.ColumnIndex = selectedStatusToMove;
+          // Remove the selected task from its original column
+          selectedColumn.tasks = selectedColumn.tasks.filter(
+            (task, i) => i != selectedTaskIndex
+          );
 
-            // Update the ColumnsAvailable property of the selected task
-            selectedTask.ColumnsAvailable = selectedBoard.columns[
-              selectedStatusToMove
-            ].tasks.map((task, index) => index);
+          //! Add the selected task to the new column
+          selectedBoard.columns[selectedStatusToMove].tasks = [
+            ...selectedBoard.columns[selectedStatusToMove].tasks,
+            selectedTask,
+          ];
 
-            // Remove the selected task from its original column
-            selectedColumn.tasks = selectedColumn.tasks.filter(
-              (task, i) => i != selectedTaskIndex
-            );
-
-            // Add the selected task to the new column
-            selectedBoard.columns[selectedStatusToMove].tasks.push(
-              selectedTask
-            );
-
-            // Update the selected column in the selected board
-            selectedBoard.columns[selectedTaskColumnIndex] = selectedColumn;
-          }
+          // Update the selected column in the selected board
+          selectedBoard.columns[selectedTaskColumnIndex] = selectedColumn;
 
           // Update the selected board in the array of boards
           updatedArrOfBoards[selectedBoardIndex] = selectedBoard;

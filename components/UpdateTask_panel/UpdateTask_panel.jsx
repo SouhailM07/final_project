@@ -156,7 +156,7 @@ let Subtasks = ({ taskName_state, taskDescription_state }) => {
           })}
         </ul>
         <ADD_NEW_SUBTASK_BTN fnc={() => ADD_NEW_SUBTASK_f()} />
-        <StatusTask />
+        {/* <StatusTask /> */}
         <CREATE_TASK_BTN
           subtasks_data={taskSubtasks}
           btn_taskName_state={taskName_state}
