@@ -15,6 +15,7 @@ import {
   DeleteTask_panel,
   UpdateBoard_panel,
   UpdateTask_panel,
+  Toggle_menubar,
 } from "..";
 //
 import useToggleStore from "@/app/zustand/toggle";
@@ -31,6 +32,7 @@ export default function MyContainer() {
     (state) => state.updateTask_panel_tg
   );
   // ? const darkMode_tg = useToggleStore((state) => state.darkMode_tg);
+  const menubar_hide = useToggleStore((state) => state.menubar_hide);
   useEffect(() => {
     document.documentElement.className = "light";
   }, []);
@@ -47,7 +49,8 @@ export default function MyContainer() {
         {taskPanel_tg && <SelectedTask_panel />}
         {updateBoard_panel_tg && <UpdateBoard_panel />}
         <main className="flex">
-          <Menubar />
+          <Toggle_menubar />
+          {!menubar_hide && <Menubar />}
           <Main />
         </main>
       </div>

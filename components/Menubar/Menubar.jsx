@@ -11,10 +11,7 @@ import axios from "axios";
 // assets
 import Image from "next/image";
 import layoutLogo from "@/public/bx-layout.svg";
-import sunLogo from "@/public/sun-regular.svg";
-import moonLogo from "@/public/moon-solid.svg";
-import hideLogo from "../../public/eye-slash-regular.svg";
-import showLogo from "../../public/eye-regular.svg";
+
 //
 import useToggleStore from "@/app/zustand/toggle";
 import addBoardsStore from "@/app/zustand/addBoards";

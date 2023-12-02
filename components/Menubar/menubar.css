@@ -21,7 +21,7 @@ aside {
 }
 
 #Menubar-s2 {
-  @apply h-[14rem]  pt-[1rem];
+  @apply h-[11rem]  pt-[1rem];
 }
 
 aside ul li input[type="radio"] ~ label {

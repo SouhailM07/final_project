@@ -12,6 +12,7 @@ const useToggleStore = create((set) => ({
   updateTask_panel_tg: false,
   darkMode_tg: false,
   menubar_mobile_tg: false,
+  menubar_hide: false,
   createBoard_tg_r: (st) => set((state) => ({ createBoard_tg: st })),
   addTask_tg_r: (st) => set((state) => ({ addTask_tg: st })),
   taskPanel_tg_r: (st) => set((state) => ({ taskPanel_tg: st })),
@@ -27,6 +28,7 @@ const useToggleStore = create((set) => ({
   updateTask_panel_tg_r: (st) => set((state) => ({ updateTask_panel_tg: st })),
   darkMode_tg_r: () => set((state) => ({ darkMode_tg: !state.darkMode_tg })),
   menubar_mobile_tg_r: (st) => set((state) => ({ menubar_mobile_tg: st })),
+  menubar_hide_r: () => set((state) => ({ menubar_hide: !state.menubar_hide })),
 }));
 
 export default useToggleStore;
