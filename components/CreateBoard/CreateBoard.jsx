@@ -110,7 +110,11 @@ let CREATE_NEW_BOARD_BTN = ({ newBoard_state }) => {
         onClick={async () => {
           // create_new_board_axios();
           // ! activate after completing redux add_boards
-          if (newBoard.name.length > 0) {
+
+          let filterColumns = newBoard_state.filter((e, i) => {
+            return e[`input`].length == 0;
+          });
+          if (newBoard.name.length > 0 && filterColumns.length == 0) {
             edit_newBoard_id_r(randomId);
             edit_newBoard_columns_r(newBoard_state);
             add_newBoard();

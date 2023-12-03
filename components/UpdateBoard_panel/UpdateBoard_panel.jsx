@@ -138,11 +138,16 @@ let BoardColumns = ({ boardName_state }) => {
       </button>
       <button
         onClick={async () => {
-          await updateBoard_name_r(boardName_state);
-          await updateBoard_columns_r(boardCols);
-          await updateBoard_panel_tg_r(false);
-          // await update_newTask_columnsAvailable_r();
-          console.log(arrOfBoards);
+          let filterColumns = boardCols.filter((e, i) => {
+            return e[`input`].length == 0;
+          });
+          if (boardName_state.length > 0 && filterColumns == 0) {
+            await updateBoard_name_r(boardName_state);
+            await updateBoard_columns_r(boardCols);
+            await updateBoard_panel_tg_r(false);
+            // await update_newTask_columnsAvailable_r();
+            console.log(arrOfBoards);
+          }
         }}
         className="CREATE_NEW_BOARD_BTN"
       >

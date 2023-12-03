@@ -249,13 +249,18 @@ let CREATE_TASK_BTN = ({
       <button
         className="Panel-endBtn"
         onClick={async () => {
-          await updateTask_name_r(btn_taskName_state);
-          await updateTask_description_r(btn_taskDescription_state);
-          await updateTask_subtasks_r(subtasks_data);
-          // ! you need to provide a way to get the index of the new status onChange
-          // await updateTask_status();
-          await updateTask_panel_tg_r(false);
-          taskPanel_tg_r(false);
+          let filterSubtasks = subtasks_data.filter((e, i) => {
+            return e.subtask.length == 0;
+          });
+          if (filterSubtasks.length == 0 && btn_taskName_state.length > 0) {
+            await updateTask_name_r(btn_taskName_state);
+            await updateTask_description_r(btn_taskDescription_state);
+            await updateTask_subtasks_r(subtasks_data);
+            // ! you need to provide a way to get the index of the new status onChange
+            // await updateTask_status();
+            await updateTask_panel_tg_r(false);
+            taskPanel_tg_r(false);
+          }
         }}
       >
         Save changes

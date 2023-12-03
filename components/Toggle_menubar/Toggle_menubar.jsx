@@ -14,7 +14,7 @@ export default function Toggle_menubar() {
     <>
       <div
         onClick={() => menubar_hide_r()}
-        className={`bg-act rounded-r-full grid select-none place-items-center absolute self-end z-[10] h-[4rem] ${
+        className={`bg-act rounded-r-full z-[2] grid select-none place-items-center absolute self-end h-[4rem] ${
           !menubar_hide ? "w-[22rem]" : "w-[5rem]"
         }`}
       >

@@ -218,8 +218,11 @@ let CREATE_TASK_BTN = ({ subtasks_data }) => {
       <button
         id="CREATE_TASK_BTN"
         onClick={async () => {
+          let filterSubtasks = subtasks_data.filter((e, i) => {
+            return e.subtask.length == 0;
+          });
           edit_newTask_subtasks_r(subtasks_data);
-          if (newTask_info.taskName.length > 0) {
+          if (newTask_info.taskName.length > 0 && filterSubtasks.length == 0) {
             await edit_newTask_columnsAvailable_r();
             await add_newTask_r();
             console.log(arrOfBoards);
